@@ -16,10 +16,10 @@ $type-size-7: 0.6875em; // small text
 $type-size-8: 0.625em;  // tiny text
 
 // Body text size
-$doc-font-size: 12 !default; // Base font size in pixels
+$doc-font-size: 12; // Base font size in pixels
 
 // Line height
-$base-line-height: 1.5 !default;
+$base-line-height: 1.5;
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
