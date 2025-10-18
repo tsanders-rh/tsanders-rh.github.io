@@ -14,7 +14,7 @@ classes: wide
 
 ## The Challenge: Domain Expertise Bottleneck
 
-For years, expanding Konveyor's static analysis rulesets has been a top priority for migration teams. The value is clear: comprehensive rules mean better automated analysis, faster migrations, and fewer surprises during modernization projects. But there's been a persistent challenge: **getting domain experts to author rules**.
+For years, expanding [Konveyor's](https://konveyor.io) static analysis rulesets has been a top priority for migration teams. The value is clear: comprehensive rules mean better automated analysis, faster migrations, and fewer surprises during modernization projects. But there's been a persistent challenge: **getting domain experts to author rules**.
 
 Writing analyzer rules requires understanding both the source and target technologies deeply. Spring Boot experts know the migration patterns, but they're busy building applications, not writing YAML. The result? Migration guides get written, documentation gets published, but rulesets lag behind.
 
