@@ -1,7 +1,7 @@
 ---
 layout: single
 title: "AI-Powered Migration Rules: Turning Documentation into Konveyor Rulesets"
-date: 2025-01-18
+date: 2025-10-18
 categories: [migration, ai, konveyor]
 tags: [migration, ai, konveyor, automation]
 excerpt: "How we solved the domain expert engagement problem by transforming migration guides into analyzer rules"
