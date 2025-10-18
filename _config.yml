@@ -1,0 +1,57 @@
+# Site Settings
+title: "Migration & Modernization"
+description: "AI-powered tools and techniques for application modernization"
+url: "https://tsanders-rh.github.io"
+baseurl: ""
+
+# Author
+author:
+  name: "Tom Sanders"
+  bio: "Application modernization, migration automation, and AI tooling"
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/tsanders-rh"
+
+# Build Settings
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Optional: Use a better theme (uncomment after initial setup)
+# remote_theme: "mmistakes/minimal-mistakes@4.24.0"
+
+# Exclude from processing
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+
+# Collections
+collections:
+  posts:
+    output: true
+    permalink: /:year/:month/:day/:title/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      author_profile: true
+      read_time: true
+      share: true
+      related: true
+
+# Analytics (optional - add later)
+# google_analytics: UA-XXXXXXXXX-X
+
+# Comments (optional - add later)
+# disqus:
+#   shortname: your-disqus-shortname
