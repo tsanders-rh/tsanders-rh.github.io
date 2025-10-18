@@ -1,0 +1,12 @@
+# Main navigation
+main:
+  - title: "Posts"
+    url: /
+  - title: "About"
+    url: /about/
+  - title: "Tags"
+    url: /tags/
+  - title: "Categories"
+    url: /categories/
+  - title: "GitHub"
+    url: https://github.com/tsanders-rh

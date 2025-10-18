@@ -1,10 +1,11 @@
 ---
-layout: page
-title: About
+layout: single
+title: "About"
 permalink: /about/
+author_profile: true
 ---
 
-# About Me
+## About Me
 
 I work on application modernization and migration automation, with a focus on using AI to accelerate the migration process.
 

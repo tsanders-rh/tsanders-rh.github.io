@@ -1,9 +1,17 @@
 ---
-layout: post
+layout: single
 title: "AI-Powered Migration Rules: Turning Documentation into Konveyor Rulesets"
 date: 2025-01-18
 categories: [migration, ai, konveyor]
+tags: [migration, ai, konveyor, automation]
 excerpt: "How we solved the domain expert engagement problem by transforming migration guides into analyzer rules"
+header:
+  overlay_color: "#333"
+  overlay_filter: "0.5"
+toc: true
+toc_label: "Contents"
+toc_icon: "list"
+author_profile: true
 ---
 
 ## The Challenge: Domain Expertise Bottleneck
