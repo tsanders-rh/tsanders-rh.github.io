@@ -4,22 +4,22 @@
 
 @charset "utf-8";
 
-// Font size variables (adjust these to change font sizes)
-// Smaller numbers = larger fonts
-$type-size-1: 2.441em;  // h1
-$type-size-2: 1.953em;  // h2
-$type-size-3: 1.563em;  // h3
-$type-size-4: 1.25em;   // h4
-$type-size-5: 1em;      // h5
-$type-size-6: 0.875em;  // h6
-$type-size-7: 0.6875em; // small text
-$type-size-8: 0.625em;  // tiny text
-
-// Body text size
-$doc-font-size: 12; // Base font size in pixels
-
-// Line height
-$base-line-height: 1.5;
-
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
+
+// Custom CSS overrides
+html {
+  font-size: 12px !important;
+}
+
+body {
+  font-size: 1rem !important;
+}
+
+.page__content {
+  font-size: 1rem !important;
+}
+
+p, li, td, th {
+  font-size: 1rem !important;
+}
