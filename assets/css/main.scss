@@ -19,11 +19,14 @@ html {
   font-size: 1.5rem !important;
 }
 
-.sidebar .author__content,
-.sidebar .author__bio,
-.sidebar .author__urls,
-.sidebar .author__urls li,
-.sidebar p,
-.author__name {
+.sidebar,
+.sidebar *,
+.author__avatar + .author__content,
+.author__content,
+.author__bio,
+.author__name,
+.author__urls,
+.author__urls li,
+.author__urls a {
   font-size: 14px !important;
 }
