@@ -39,6 +39,11 @@ The Analyzer Rule Generator uses Large Language Models to automatically extract 
 
 ## Live Demo: Spring Boot 3 → 4 Rules in 2 Minutes
 
+<video width="100%" controls>
+  <source src="{{ site.baseurl }}/assets/videos/blog-demo.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
 Let's generate migration rules from the official Spring Boot 4.0 Migration Guide.
 
 ### Step 1: Generate Rules
