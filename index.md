@@ -14,7 +14,7 @@ excerpt: "Transforming application modernization with AI-powered tools and autom
 
 # Welcome
 
-I write about application modernization, migration automation, and AI-powered DevOps tooling.
+Welcome to my corner of the tech world! I write about the things that keep modern IT moving — application modernization, migration automation, and AI-powered DevOps tools. Over the years, I’ve seen how fast technology shifts and how tough it can be to keep legacy systems, automation, and AI all in sync. This blog is where I share what I’ve learned, what I’m experimenting with, and what’s coming next in the world of smarter, faster, and more automated software delivery. If you’re passionate about modernizing apps, streamlining migrations, or exploring how AI can reshape DevOps, you’re in the right place.
 
 ## What You'll Find Here
 
