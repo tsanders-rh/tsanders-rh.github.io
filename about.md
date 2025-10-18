@@ -7,7 +7,7 @@ author_profile: true
 
 ## About Me
 
-I work on application modernization and migration automation, with a focus on using AI to accelerate the migration process.
+I'm an Engineering Director with over 30 years of experience building and leading high-performing teams. I specialize in application modernization and migration automation, with a current focus on using AI to accelerate the migration process.  My approach combines strategic leadership with hands-on technical innovation. I believe in empowering teams through collaboration, continuous learning, and exploring emerging technologies to solve complex migration challenges at scale. Whether it's optimizing processes, reducing time to market, or enhancing product quality through automation, I'm dedicated to delivering measurable outcomes that drive business value.
 
 ## What I Write About
 
