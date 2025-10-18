@@ -8,9 +8,6 @@ excerpt: "How we solved the domain expert engagement problem by transforming mig
 header:
   overlay_color: "#333"
   overlay_filter: "0.5"
-toc: true
-toc_label: "Contents"
-toc_icon: "list"
 author_profile: true
 ---
 
