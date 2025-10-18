@@ -94,6 +94,7 @@ defaults:
       related: true
       toc: false
       toc_sticky: false
+      classes: wide
   # _pages
   - scope:
       path: "_pages"

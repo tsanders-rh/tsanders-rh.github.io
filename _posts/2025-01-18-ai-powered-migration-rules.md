@@ -9,6 +9,7 @@ header:
   overlay_color: "#333"
   overlay_filter: "0.5"
 author_profile: true
+classes: wide
 ---
 
 ## The Challenge: Domain Expertise Bottleneck
