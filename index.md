@@ -10,6 +10,7 @@ header:
       url: "/about/"
   caption: "AI-powered migration automation"
 excerpt: "Transforming application modernization with AI-powered tools and automation"
+toc: true
 ---
 
 # Welcome
