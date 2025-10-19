@@ -1,5 +1,6 @@
 ---
 layout: home
+toc: true
 author_profile: true
 header:
   overlay_color: "#000"
@@ -10,7 +11,7 @@ header:
       url: "/about/"
   caption: "AI-powered migration automation"
 excerpt: "Transforming application modernization with AI-powered tools and automation"
-toc: true
+
 ---
 
 # Welcome
