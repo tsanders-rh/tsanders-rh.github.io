@@ -139,6 +139,18 @@ python scripts/generate_rules.py \
 - TypeScript/React (PatternFly, Material-UI, etc.)
 - Go, Python, and more
 
+## Current Limitations and Future Work
+
+The generated rules are currently limited to patterns that Konveyor's existing analyzer providers can detect—primarily file content matching (regex), XML/YAML queries, and dependency analysis. This works well for:
+- API replacements and imports
+- Configuration file changes
+- Dependency updates
+- Simple code patterns
+
+However, some migration patterns require deeper semantic analysis. For example, in React 19 migrations, detecting whether `propTypes` is used on a function component (deprecated) vs a class component (still valid) requires understanding code structure, not just pattern matching.
+
+**As Konveyor adds new analyzer providers** (like TypeScript language server, JavaScript AST analysis, or Python type checking), the rule generator will automatically be able to create more sophisticated rules. The migration knowledge is already in the documentation—we just need the analysis capabilities to match.
+
 ## What's Next
 
 The goal is simple: **make every migration guide usable by Konveyor**.
