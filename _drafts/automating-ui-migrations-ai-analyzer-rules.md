@@ -127,7 +127,7 @@ Notice how each rule includes:
 
 The workflow is surprisingly elegant:
 
-```mermaid
+<div class="mermaid">
 flowchart TD
     A[Migration Guide URL] --> B[LLM Extraction]
     B --> C[Structured Patterns]
@@ -150,7 +150,7 @@ flowchart TD
     style G fill:#ffe1e1
     style I fill:#e1ffe1
     style N fill:#f0e1ff
-```
+</div>
 
 1. **LLM Extraction**: Feed the migration guide URL to Claude (or other LLMs). The model analyzes the documentation and extracts structured migration patterns - component renames, API changes, prop removals, etc.
 
