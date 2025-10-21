@@ -42,7 +42,9 @@ python scripts/generate_rules.py \
     --guide https://www.patternfly.org/get-started/upgrade/ \
     --source patternfly5 \
     --target patternfly6 \
-    --provider anthropic
+    --output ./examples/output \
+    --provider anthropic \
+    --model claude-3-7-sonnet-latest
 
 # Step 2: Run analysis on your codebase
 kantra analyze \
@@ -57,6 +59,14 @@ kantra analyze \
 ```
 
 That's it. **Five minutes** from documentation URL to a complete analysis of our codebase.
+
+![Rule Generation Command Output](/assets/images/posts/automating-ui-migrations/rule-generation-output.png)
+
+<!--
+SCREENSHOT 1: Rule Generation Command Output
+Show terminal output of the `generate_rules.py` command with success messages: "Extracted 15 patterns from migration guide", "Generated 15 rules across 8 concern areas", and the time elapsed.
+Save as: assets/images/posts/automating-ui-migrations/rule-generation-output.png
+-->
 
 ## What Gets Generated
 
@@ -128,41 +138,37 @@ Notice how each rule includes:
 The workflow is surprisingly elegant:
 
 <div class="mermaid">
-flowchart TD
-    A[Migration Guide URL] --> B[LLM Extraction]
-    B --> C[Structured Patterns]
-    C --> D[Rule Generator]
-    D --> E[Konveyor Analyzer Rules<br/>YAML]
-    E --> F[Kantra Static Analysis]
-    F --> G[Violation Report<br/>47 violations in 23 files]
-    G --> H[Konveyor AI Assistant]
-    H --> I[Suggested Fixes]
-    I --> J{Developer Review}
-    J -->|Accept| K[Apply Fix]
-    J -->|Modify| L[Adjust & Apply]
-    J -->|Reject| M[Manual Fix]
-    K --> N[Migrated Code]
-    L --> N
-    M --> N
+flowchart LR
+    A[Migration Guide] --> B[LLM Extraction]
+    B --> C[Analyzer Rules]
+    C --> D[Static Analysis]
+    D --> E[Violations Found]
+    E --> F[AI Suggestions]
+    F --> G{Review}
+    G -->|Accept/Modify| H[Fixed Code]
+    G -->|Reject| I[Manual Fix]
+    I --> H
 
-    style A fill:#e1f5ff
-    style E fill:#fff4e1
-    style G fill:#ffe1e1
-    style I fill:#e1ffe1
-    style N fill:#f0e1ff
+    style A fill:#4a9eff,color:#000
+    style C fill:#ffb84d,color:#000
+    style E fill:#ff6b6b,color:#000
+    style F fill:#51cf66,color:#000
+    style H fill:#9775fa,color:#000
 </div>
 
-1. **LLM Extraction**: Feed the migration guide URL to Claude (or other LLMs). The model analyzes the documentation and extracts structured migration patterns - component renames, API changes, prop removals, etc.
+1. **LLM Extraction**: Feed the migration guide to Claude, which extracts structured patterns—component renames, API changes, prop removals, etc.
 
-2. **Rule Generation**: Convert those patterns into Konveyor analyzer rule format. The tool handles all the YAML structure, regex escaping, and metadata generation.
+2. **Analyzer Rules**: Generate Konveyor analyzer rules in YAML format with detection patterns, effort estimates, and remediation guidance.
 
-3. **Static Analysis**: Run Kantra (Konveyor's CLI) against your codebase using the generated rules. It scans every file matching the pattern and reports violations.
+3. **Static Analysis**: Kantra scans your codebase using the generated rules and identifies all violations with file locations and context.
 
-4. **Actionable Reports**: Get a detailed HTML report showing exactly where changes need to be made, with helpful context and links.
+4. **AI Suggestions**: Konveyor AI analyzes each violation and generates targeted fixes based on the migration patterns and surrounding code.
+
+5. **Review & Apply**: Developers review AI suggestions, accepting, modifying, or manually fixing each issue to complete the migration.
 
 ## Real Results
 
-I ran this against a test PatternFly application and here's what we found:
+I ran this against the Konveyor Tackle2-UI application and here's what we found:
 
 ```
 Rule Generation:
@@ -185,9 +191,25 @@ Top Issues:
 
 What would have been **days of manual code review** became a **2-minute automated process**.
 
+![Kantra Analysis Report](/assets/images/posts/automating-ui-migrations/kantra-analysis-report.png)
+
+<!--
+SCREENSHOT 2: Kantra Analysis Report
+Show the HTML violation report with file list, violation counts, and a few expanded violations showing the rule messages, file locations, and links to documentation.
+Save as: assets/images/posts/automating-ui-migrations/kantra-analysis-report.png
+-->
+
 ## From Detection to Resolution: AI-Assisted Fixing
 
 Finding violations is just the first step. The real value comes from fixing them—and this is where Konveyor AI becomes a game-changer for developer productivity and cost savings.
+
+![Konveyor AI Fix Suggestion](/assets/images/posts/automating-ui-migrations/konveyor-ai-suggestion.png)
+
+<!--
+SCREENSHOT 3: Konveyor AI Fix Suggestion
+Show Konveyor AI interface analyzing a violation and generating a suggested fix. Include before/after code or the AI suggestion with accept/modify/reject options.
+Save as: assets/images/posts/automating-ui-migrations/konveyor-ai-suggestion.png
+-->
 
 Once you've identified 47 violations across 23 files, you have two options:
 
@@ -212,41 +234,6 @@ This dramatically shifts how development teams spend their time. Rather than bur
 
 The cost savings are substantial. Consider a mid-sized migration with hundreds of violations across dozens of files. What might require **multiple developers working for a week** could potentially be reduced to **a day or two of review and validation**. The ROI isn't just in developer hours saved—it's in faster time-to-market, reduced migration risk, and the ability to tackle migrations that might otherwise be deprioritized due to resource constraints.
 
-## The Technical Challenges We Solved
-
-Building this wasn't trivial. Here are the key challenges we overcame:
-
-### 1. Understanding Konveyor's Rule Format
-
-Konveyor analyzer uses different providers for different types of analysis. For JavaScript/TypeScript patterns, we needed to use the `builtin.filecontent` provider, which has specific requirements:
-
-- **Simple regex patterns**: Complex patterns with `\s`, `\{`, `\}` don't work. We had to use `.*` wildcards instead.
-- **File pattern syntax**: Requires regex like `.*\.(ts|tsx|js|jsx)`, not shell globs like `*.{ts,tsx,js,jsx}`
-- **Ruleset metadata**: Each rule directory needs a `ruleset.yaml` file or rules won't be loaded
-
-We updated our LLM prompts to generate the correct format and added automatic `ruleset.yaml` generation.
-
-### 2. Semantic Pattern Extraction
-
-Not all migration changes are simple string replacements. The LLM needs to understand:
-
-- Which changes are mechanical (TRIVIAL effort)
-- Which require refactoring (MEDIUM/HIGH effort)
-- What location types to use (IMPORT, ANNOTATION, METHOD_CALL, etc.)
-- When to use Java provider vs builtin provider
-
-We crafted detailed prompts with examples to guide the LLM toward generating high-quality, accurate patterns.
-
-### 3. Framework-Specific Detection
-
-Different frameworks need different detection strategies:
-
-- **React/TypeScript**: Use `builtin.filecontent` with import patterns
-- **Java/Spring**: Use `java.referenced` with FQN patterns
-- **Configuration files**: Use `builtin.filecontent` with property patterns
-
-The tool automatically detects the language from framework names and applies the right strategy.
-
 ## Beyond PatternFly: This Works for Any Migration
 
 While we focused on PatternFly 5→6, this approach works for any framework migration that has documentation:
@@ -257,16 +244,6 @@ While we focused on PatternFly 5→6, this approach works for any framework migr
 - Your custom internal framework updates
 
 The pattern is universal: **Documentation → Patterns → Rules → Analysis**
-
-## What's Next
-
-We're just getting started. Here's what's on the roadmap:
-
-- **Auto-fix capabilities**: Generate codemods that automatically apply safe transformations
-- **CI/CD integration**: Fail builds when deprecated patterns are introduced
-- **Custom rule templates**: Let teams define their own patterns for internal migrations
-- **Multi-framework support**: Detect and migrate polyglot applications
-- **Incremental analysis**: Only scan changed files for faster feedback
 
 ## Try It Yourself
 
