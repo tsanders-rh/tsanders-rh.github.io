@@ -178,15 +178,8 @@ Rule Generation:
 
 Static Analysis:
   ✓ Scanned 2,847 files
-  ✓ Found 47 violations across 23 files
+  ✓ Found 2,540 violations across 125 files
   ✓ Analysis time: 8 seconds
-
-Top Issues:
-  - Text → Content renames: 12 instances
-  - Chip → Label replacements: 8 instances
-  - Removed props: 15 instances
-  - Import path changes: 7 instances
-  - CSS class renames: 5 instances
 ```
 
 What would have been **days of manual code review** became a **2-minute automated process**.
@@ -211,9 +204,9 @@ Show Konveyor AI interface analyzing a violation and generating a suggested fix.
 Save as: assets/images/posts/automating-ui-migrations/konveyor-ai-suggestion.png
 -->
 
-Once you've identified 47 violations across 23 files, you have two options:
+Once you've identified 2,540 violations across 125 files, you have two options:
 
-**Manual Approach**: Developer opens each file, reads the violation message, consults the migration guide, understands the context, writes the fix, tests it. Multiply this by 47 violations. Even for experienced developers, this could easily consume **days of focused work**.
+**Manual Approach**: Developer opens each file, reads the violation message, consults the migration guide, understands the context, writes the fix, tests it. Multiply this by 2,540 violations. Even for experienced developers, this could easily consume **weeks of focused work**.
 
 **AI-Assisted Approach**: Use Konveyor AI to analyze the violation in context and generate targeted fixes. The AI understands:
 - The specific code pattern that needs to change
@@ -232,7 +225,7 @@ This dramatically shifts how development teams spend their time. Rather than bur
 - Testing and ensuring quality
 - Solving novel problems that AI can't handle
 
-The cost savings are substantial. Consider a mid-sized migration with hundreds of violations across dozens of files. What might require **multiple developers working for a week** could potentially be reduced to **a day or two of review and validation**. The ROI isn't just in developer hours saved—it's in faster time-to-market, reduced migration risk, and the ability to tackle migrations that might otherwise be deprioritized due to resource constraints.
+The cost savings are substantial. In our case, with over 2,500 violations across more than 100 files, what might require **multiple developers working for weeks** could potentially be reduced to **a few days of review and validation**. The ROI isn't just in developer hours saved—it's in faster time-to-market, reduced migration risk, and the ability to tackle migrations that might otherwise be deprioritized due to resource constraints.
 
 ## Beyond PatternFly: This Works for Any Migration
 
