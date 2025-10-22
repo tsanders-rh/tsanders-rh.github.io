@@ -1,7 +1,7 @@
 ---
 layout: single
 title: "Automating Large-Scale UI Migrations with AI-Generated Analyzer Rules"
-date: 2025-10-20
+date: 2025-10-22
 categories: [migration, ai, konveyor, patternfly]
 tags: [migration, ai, konveyor, automation, patternfly, react, static-analysis]
 excerpt: "How we turned days of manual migration work into a five-minute automated workflow using AI-generated analyzer rules"

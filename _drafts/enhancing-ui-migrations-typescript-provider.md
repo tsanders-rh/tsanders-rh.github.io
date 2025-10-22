@@ -1,4 +1,16 @@
-# Enhancing UI Migration Rules with TypeScript Provider Support
+---
+layout: single
+title: "Enhancing UI Migration Rules with TypeScript Provider Support"
+date: 2025-10-21
+categories: [migration, ai, konveyor, typescript]
+tags: [migration, typescript, konveyor, static-analysis, semantic-analysis, patternfly, react]
+excerpt: "Moving beyond text pattern matching: how the TypeScript provider enables semantic code analysis for more accurate, faster UI migrations"
+header:
+  overlay_color: "#333"
+  overlay_filter: "0.5"
+author_profile: true
+classes: wide
+---
 
 ## Introduction
 
@@ -61,6 +73,17 @@ The TypeScript provider integrates the **TypeScript Language Server** to perform
 
 This will **only** match actual code references to the `OldButton` symbol, ignoring comments, strings, and unrelated variables.
 
+![TypeScript vs Builtin Provider Comparison](/assets/images/posts/typescript-provider/provider-comparison.png)
+
+<!--
+SCREENSHOT 1: TypeScript vs Builtin Provider Comparison
+Split screen showing the same code analyzed by both providers:
+- Left: Builtin provider results showing false positives in comments and strings
+- Right: TypeScript provider results showing only actual code references
+- Annotations marking correct matches (green checkmarks) vs false positives (red X)
+Save as: assets/images/posts/typescript-provider/provider-comparison.png
+-->
+
 ## What the TypeScript Provider Can Find
 
 The TypeScript provider excels at finding **top-level symbols**:
@@ -121,6 +144,32 @@ import type { ButtonProps } from '@patternfly/react-core'  // NOT found
 ```
 
 For these cases, you still need the builtin provider with regex patterns.
+
+### TypeScript Provider Capabilities Matrix
+
+| Feature                    | TypeScript Provider | Builtin Provider | Notes                           |
+|---------------------------|---------------------|------------------|---------------------------------|
+| **Functions**             | ✅ Yes              | ✅ Yes           | TypeScript: semantic only       |
+| **Classes**               | ✅ Yes              | ✅ Yes           | TypeScript: semantic only       |
+| **Variables/Constants**   | ✅ Yes              | ✅ Yes           | TypeScript: semantic only       |
+| **Imports**               | ✅ Yes              | ✅ Yes           | TypeScript more precise         |
+| **JSX Components**        | ✅ Yes              | ✅ Yes           | TypeScript avoids false matches |
+| **Class Methods**         | ❌ No               | ✅ Yes           | Must use builtin                |
+| **Object Properties**     | ❌ No               | ✅ Yes           | Must use builtin                |
+| **Type Annotations**      | ❌ No               | ✅ Yes           | Must use builtin                |
+| **Imported Types**        | ❌ No               | ✅ Yes           | Must use builtin                |
+| **JSX Props**             | ❌ No               | ✅ Yes           | Must use builtin                |
+| **Comments**              | ❌ Ignored          | ✅ Matches       | TypeScript advantage            |
+| **String Literals**       | ❌ Ignored          | ✅ Matches       | TypeScript advantage            |
+| **False Positive Rate**   | ~5%                 | ~15-20%          | TypeScript more accurate        |
+| **Analysis Speed**        | 5-7s                | 30-45s           | TypeScript faster (when scoped) |
+
+<!--
+TABLE: TypeScript Provider Capabilities Matrix
+This markdown table will render in the blog post.
+For a styled graphic version, create in spreadsheet software and save as:
+assets/images/posts/typescript-provider/capabilities-matrix.png
+-->
 
 ## Combining Both Providers: The Best of Both Worlds
 
@@ -278,6 +327,17 @@ Create `typescript-provider-settings.json`:
 }
 ```
 
+![Provider Settings Configuration](/assets/images/posts/typescript-provider/provider-settings.png)
+
+<!--
+SCREENSHOT 2: Provider Settings Configuration
+Show the typescript-provider-settings.json file in VS Code or terminal:
+- Highlight the includedPaths section (e.g., "src/")
+- Highlight the excludedPaths section (e.g., "node_modules/", "dist/")
+- Optionally show the file tree on the left to demonstrate what's included/excluded
+Save as: assets/images/posts/typescript-provider/provider-settings.png
+-->
+
 **Important:** Make sure to:
 - Set `includedPaths` to your source directory
 - Exclude `node_modules/` to prevent scanning dependencies
@@ -323,6 +383,17 @@ The generator will:
 - False positives: ~5% (only semantic matches)
 - Manual review needed: Low
 - More precise violation locations
+
+![Analysis Output Comparison](/assets/images/posts/typescript-provider/analysis-results.png)
+
+<!--
+SCREENSHOT 3: Analysis Output Comparison
+Side-by-side comparison showing:
+- Builtin only: ~2,800 violations, ~15-20% false positives, 30-45s analysis time
+- With TypeScript provider: ~2,540 violations, ~5% false positives, 5-7s analysis time
+Use a bar chart or table to visualize the improvements
+Save as: assets/images/posts/typescript-provider/analysis-results.png
+-->
 
 ## Limitations and Workarounds
 
@@ -377,6 +448,30 @@ The generator will:
 
 Start with `typescript.referenced` for component/function references, fall back to `builtin.filecontent` when needed.
 
+<div class="mermaid">
+flowchart TD
+    A[Need to find a pattern?] --> B{Is it a top-level symbol?}
+    B -->|Yes: Function/Class/Const| C{Is it imported from library?}
+    B -->|No: Method/Property/Type| D[Use builtin.filecontent]
+    C -->|Yes| E[Use typescript.referenced]
+    C -->|No: Local declaration| E
+    E --> F[Semantic Analysis]
+    D --> G[Text Pattern Matching]
+    F --> H[Precise Results]
+    G --> I[May have false positives]
+
+    style E fill:#51cf66,color:#000
+    style D fill:#ffb84d,color:#000
+    style H fill:#9775fa,color:#000
+    style I fill:#ff6b6b,color:#000
+</div>
+
+<!--
+FLOWCHART: Decision tree for choosing TypeScript vs Builtin provider
+This Mermaid diagram will render in the blog post automatically.
+For a static image version, save as: assets/images/posts/typescript-provider/provider-decision-tree.png
+-->
+
 ### 2. Combine Providers for Complete Coverage
 
 ```yaml
@@ -418,6 +513,18 @@ Create test files to verify rules work correctly:
       filePattern: "*.tsx"
   message: Found TestComponent
 ```
+
+![Semantic Analysis Example](/assets/images/posts/typescript-provider/semantic-analysis.png)
+
+<!--
+SCREENSHOT 4: Semantic Analysis Example
+Code editor showing a file with TypeScript provider violations highlighted:
+- Show actual component usage highlighted (e.g., <OldButton />)
+- Show comment containing "OldButton" NOT highlighted
+- Show string literal containing "OldButton" NOT highlighted
+- Include hover tooltip or problems panel showing violation details
+Save as: assets/images/posts/typescript-provider/semantic-analysis.png
+-->
 
 ## Integration with Konveyor AI
 
