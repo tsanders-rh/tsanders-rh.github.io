@@ -117,12 +117,12 @@ tag_archive:
 #   disqus:
 #     shortname: "your-disqus-shortname"
 
-# Analytics (optional - uncomment to enable)
-# analytics:
-#   provider: "google-gtag"
-#   google:
-#     tracking_id: "UA-XXXXXXXXX-X"
-#     anonymize_ip: false
+# Analytics
+analytics:
+  provider: "google-gtag"
+  google:
+    tracking_id: "G-1DYF7RR63F"
+    anonymize_ip: false
 
 # After footer scripts (for mermaid diagrams)
 after_footer_scripts:
