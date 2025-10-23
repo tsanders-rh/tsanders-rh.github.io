@@ -285,7 +285,7 @@ The future of code migration is automated, intelligent, and developer-friendly. 
 ---
 
 **Want to learn more?**
-- GitHub: https://github.com/konveyor/analyzer-rule-generator
+- GitHub: https://github.com/tsanders-rh/analyzer-rule-generator
 - Konveyor Project: https://konveyor.io
 - Try it on your codebase and let us know what you think!
 
