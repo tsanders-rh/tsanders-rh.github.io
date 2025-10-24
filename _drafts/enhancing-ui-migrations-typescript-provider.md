@@ -18,7 +18,7 @@ In my [previous post](link-to-first-post), I showed how to use Konveyor Analyzer
 
 But what if we could go deeper? What if instead of just searching for text patterns, we could perform **semantic analysis** of TypeScript code to find actual symbol references, imports, and type usage?
 
-This is where the **TypeScript provider** comes in.
+This is where the **nodejs provider** comes in.
 
 ## The Problem with Text-Only Matching
 
@@ -49,9 +49,9 @@ The builtin provider can't distinguish between:
 - String literals
 - Variable names that happen to contain the pattern
 
-## Enter the TypeScript Provider
+## Enter the nodejs Provider
 
-The TypeScript provider integrates the **TypeScript Language Server** to perform semantic analysis. It understands:
+The nodejs provider integrates the **TypeScript Language Server** to perform semantic analysis. It understands:
 
 - Import statements
 - Function and class declarations
@@ -59,10 +59,10 @@ The TypeScript provider integrates the **TypeScript Language Server** to perform
 - Type annotations
 - Module structure
 
-**The same rule with TypeScript provider:**
+**The same rule with nodejs provider:**
 
 ```yaml
-# TypeScript provider approach - semantic analysis
+# nodejs provider approach - semantic analysis
 - ruleID: find-deprecated-component
   when:
     typescript.referenced:
@@ -73,20 +73,20 @@ The TypeScript provider integrates the **TypeScript Language Server** to perform
 
 This will **only** match actual code references to the `OldButton` symbol, ignoring comments, strings, and unrelated variables.
 
-![TypeScript vs Builtin Provider Comparison](/assets/images/posts/typescript-provider/provider-comparison.png)
+![nodejs vs Builtin Provider Comparison](/assets/images/posts/typescript-provider/provider-comparison.png)
 
 <!--
-SCREENSHOT 1: TypeScript vs Builtin Provider Comparison
+SCREENSHOT 1: nodejs vs Builtin Provider Comparison
 Split screen showing the same code analyzed by both providers:
 - Left: Builtin provider results showing false positives in comments and strings
-- Right: TypeScript provider results showing only actual code references
+- Right: nodejs provider results showing only actual code references
 - Annotations marking correct matches (green checkmarks) vs false positives (red X)
 Save as: assets/images/posts/typescript-provider/provider-comparison.png
 -->
 
-## What the TypeScript Provider Can Find
+## What the nodejs Provider Can Find
 
-The TypeScript provider excels at finding **top-level symbols**:
+The nodejs provider excels at finding **top-level symbols**:
 
 ✅ **Functions:**
 ```typescript
@@ -116,9 +116,9 @@ import { OldButton } from '@patternfly/react-core'  // Found
 <OldButton />  // Found (references the imported symbol)
 ```
 
-## What the TypeScript Provider Cannot Find
+## What the nodejs Provider Cannot Find
 
-The TypeScript provider has limitations - it **cannot** find:
+The nodejs provider has limitations - it **cannot** find:
 
 ❌ **Methods inside classes:**
 ```typescript
@@ -145,27 +145,27 @@ import type { ButtonProps } from '@patternfly/react-core'  // NOT found
 
 For these cases, you still need the builtin provider with regex patterns.
 
-### TypeScript Provider Capabilities Matrix
+### nodejs Provider Capabilities Matrix
 
-| Feature                    | TypeScript Provider | Builtin Provider | Notes                           |
+| Feature                    | nodejs Provider | Builtin Provider | Notes                           |
 |---------------------------|---------------------|------------------|---------------------------------|
-| **Functions**             | ✅ Yes              | ✅ Yes           | TypeScript: semantic only       |
-| **Classes**               | ✅ Yes              | ✅ Yes           | TypeScript: semantic only       |
-| **Variables/Constants**   | ✅ Yes              | ✅ Yes           | TypeScript: semantic only       |
-| **Imports**               | ✅ Yes              | ✅ Yes           | TypeScript more precise         |
-| **JSX Components**        | ✅ Yes              | ✅ Yes           | TypeScript avoids false matches |
+| **Functions**             | ✅ Yes              | ✅ Yes           | nodejs: semantic only       |
+| **Classes**               | ✅ Yes              | ✅ Yes           | nodejs: semantic only       |
+| **Variables/Constants**   | ✅ Yes              | ✅ Yes           | nodejs: semantic only       |
+| **Imports**               | ✅ Yes              | ✅ Yes           | nodejs more precise         |
+| **JSX Components**        | ✅ Yes              | ✅ Yes           | nodejs avoids false matches |
 | **Class Methods**         | ❌ No               | ✅ Yes           | Must use builtin                |
 | **Object Properties**     | ❌ No               | ✅ Yes           | Must use builtin                |
 | **Type Annotations**      | ❌ No               | ✅ Yes           | Must use builtin                |
 | **Imported Types**        | ❌ No               | ✅ Yes           | Must use builtin                |
 | **JSX Props**             | ❌ No               | ✅ Yes           | Must use builtin                |
-| **Comments**              | ❌ Ignored          | ✅ Matches       | TypeScript advantage            |
-| **String Literals**       | ❌ Ignored          | ✅ Matches       | TypeScript advantage            |
-| **False Positive Rate**   | ~5%                 | ~15-20%          | TypeScript more accurate        |
-| **Analysis Speed**        | 5-7s                | 30-45s           | TypeScript faster (when scoped) |
+| **Comments**              | ❌ Ignored          | ✅ Matches       | nodejs advantage            |
+| **String Literals**       | ❌ Ignored          | ✅ Matches       | nodejs advantage            |
+| **False Positive Rate**   | ~5%                 | ~15-20%          | nodejs more accurate        |
+| **Analysis Speed**        | 5-7s                | 30-45s           | nodejs faster (when scoped) |
 
 <!--
-TABLE: TypeScript Provider Capabilities Matrix
+TABLE: nodejs Provider Capabilities Matrix
 This markdown table will render in the blog post.
 For a styled graphic version, create in spreadsheet software and save as:
 assets/images/posts/typescript-provider/capabilities-matrix.png
@@ -178,7 +178,7 @@ The most effective migration strategy uses **both providers together**:
 ### Example 1: Finding Deprecated Component Usage
 
 ```yaml
-# Use TypeScript provider for actual component references
+# Use nodejs provider for actual component references
 - ruleID: old-button-component-usage
   when:
     typescript.referenced:
@@ -205,7 +205,7 @@ The most effective migration strategy uses **both providers together**:
 ### Example 2: Finding Deprecated Lifecycle Methods
 
 ```yaml
-# TypeScript provider can't find methods, so use builtin
+# nodejs provider can't find methods, so use builtin
 - ruleID: component-will-mount-deprecated
   when:
     builtin.filecontent:
@@ -220,7 +220,7 @@ The most effective migration strategy uses **both providers together**:
 ### Example 3: Finding Type Usage
 
 ```yaml
-# TypeScript provider can't find imported types, use builtin
+# nodejs provider can't find imported types, use builtin
 - ruleID: old-button-props-type
   when:
     builtin.filecontent:
@@ -243,7 +243,7 @@ Here's how the rule generator creates rules for both providers:
 **Generated Rules:**
 
 ```yaml
-# TypeScript provider - finds component imports and usage
+# nodejs provider - finds component imports and usage
 - ruleID: patternfly-v5-to-v6-button-renamed-00000
   description: Button component renamed to ActionButton
   when:
@@ -266,7 +266,7 @@ Here's how the rule generator creates rules for both providers:
     - konveyor.io/target=patternfly-v6
     - konveyor.io/source=patternfly-v5
 
-# Builtin provider - finds prop usage TypeScript can't detect
+# Builtin provider - finds prop usage nodejs can't detect
 - ruleID: patternfly-v5-to-v6-button-props-00001
   description: Button props have changed
   when:
@@ -285,7 +285,9 @@ Here's how the rule generator creates rules for both providers:
     - konveyor.io/source=patternfly-v5
 ```
 
-## Setting Up the TypeScript Provider
+## Setting Up the nodejs Provider
+
+> **Note:** This guide assumes you have Konveyor Analyzer already installed. For installation instructions, see the [Konveyor Analyzer documentation](https://github.com/konveyor/analyzer-lsp#installation). For generating migration rules, see the [analyzer-rule-generator](https://github.com/tsanders-rh/analyzer-rule-generator).
 
 ### Prerequisites
 
@@ -301,11 +303,11 @@ Here's how the rule generator creates rules for both providers:
 
 ### Provider Settings Configuration
 
-Create `typescript-provider-settings.json`:
+Create `nodejs-provider-settings.json`:
 
 ```json
 {
-  "name": "typescript",
+  "name": "nodejs",
   "binaryPath": "/path/to/typescript-language-server",
   "address": "127.0.0.1:0",
   "initConfig": [
@@ -331,7 +333,7 @@ Create `typescript-provider-settings.json`:
 
 <!--
 SCREENSHOT 2: Provider Settings Configuration
-Show the typescript-provider-settings.json file in VS Code or terminal:
+Show the nodejs-provider-settings.json file in VS Code or terminal:
 - Highlight the includedPaths section (e.g., "src/")
 - Highlight the excludedPaths section (e.g., "node_modules/", "dist/")
 - Optionally show the file tree on the left to demonstrate what's included/excluded
@@ -343,19 +345,19 @@ Save as: assets/images/posts/typescript-provider/provider-settings.png
 - Exclude `node_modules/` to prevent scanning dependencies
 - Point to your compiled `generic-external-provider` binary
 
-### Running Analysis with TypeScript Provider
+### Running Analysis with nodejs Provider
 
 ```bash
 konveyor-analyzer \
-  --provider-settings=typescript-provider-settings.json \
+  --provider-settings=nodejs-provider-settings.json \
   --rules=patternfly-v5-to-v6-migration.yaml \
   --output-file=analysis-output.yaml \
   --verbose=1
 ```
 
-## Generating Rules with TypeScript Support
+## Generating Rules with nodejs Support
 
-The analyzer-rule-generator automatically determines when to use TypeScript provider vs builtin provider:
+The analyzer-rule-generator automatically determines when to use nodejs provider vs builtin provider:
 
 ```bash
 python src/rule_generator/main.py \
@@ -373,12 +375,12 @@ The generator will:
 
 ## Performance Comparison
 
-**Without TypeScript Provider (builtin only):**
+**Without nodejs Provider (builtin only):**
 - Analysis time: 30-45 seconds
 - False positives: ~15-20%
 - Manual review needed: High
 
-**With TypeScript Provider:**
+**With nodejs Provider:**
 - Analysis time: 5-7 seconds (with node_modules excluded)
 - False positives: ~5% (only semantic matches)
 - Manual review needed: Low
@@ -397,7 +399,7 @@ Save as: assets/images/posts/typescript-provider/analysis-results.png
 
 ## Limitations and Workarounds
 
-### Limitation 1: TypeScript Provider Only Finds Top-Level Symbols
+### Limitation 1: nodejs Provider Only Finds Top-Level Symbols
 
 **Workaround:** Use builtin provider for methods, properties, and nested symbols.
 
@@ -444,16 +446,16 @@ Save as: assets/images/posts/typescript-provider/analysis-results.png
 
 ## Best Practices
 
-### 1. Use TypeScript Provider First
+### 1. Use nodejs Provider First
 
-Start with `typescript.referenced` for component/function references, fall back to `builtin.filecontent` when needed.
+Start with `nodejs.referenced` for component/function references, fall back to `builtin.filecontent` when needed.
 
 <div class="mermaid">
 flowchart TD
     A[Need to find a pattern?] --> B{Is it a top-level symbol?}
     B -->|Yes: Function/Class/Const| C{Is it imported from library?}
     B -->|No: Method/Property/Type| D[Use builtin.filecontent]
-    C -->|Yes| E[Use typescript.referenced]
+    C -->|Yes| E[Use nodejs.referenced]
     C -->|No: Local declaration| E
     E --> F[Semantic Analysis]
     D --> G[Text Pattern Matching]
@@ -467,7 +469,7 @@ flowchart TD
 </div>
 
 <!--
-FLOWCHART: Decision tree for choosing TypeScript vs Builtin provider
+FLOWCHART: Decision tree for choosing nodejs vs Builtin provider
 This Mermaid diagram will render in the blog post automatically.
 For a static image version, save as: assets/images/posts/typescript-provider/provider-decision-tree.png
 -->
@@ -475,9 +477,9 @@ For a static image version, save as: assets/images/posts/typescript-provider/pro
 ### 2. Combine Providers for Complete Coverage
 
 ```yaml
-# TypeScript for the component
+# nodejs for the component
 - when:
-    typescript.referenced:
+    nodejs.referenced:
       pattern: "OldComponent"
 
 # Builtin for props and methods
@@ -505,10 +507,10 @@ Use `includedPaths` and `excludedPaths` to:
 Create test files to verify rules work correctly:
 
 ```yaml
-# test/test-typescript-provider.yaml
+# test/test-nodejs-provider.yaml
 - ruleID: test-component-detection
   when:
-    typescript.referenced:
+    nodejs.referenced:
       pattern: "TestComponent"
       filePattern: "*.tsx"
   message: Found TestComponent
@@ -518,7 +520,7 @@ Create test files to verify rules work correctly:
 
 <!--
 SCREENSHOT 4: Semantic Analysis Example
-Code editor showing a file with TypeScript provider violations highlighted:
+Code editor showing a file with nodejs provider violations highlighted:
 - Show actual component usage highlighted (e.g., <OldButton />)
 - Show comment containing "OldButton" NOT highlighted
 - Show string literal containing "OldButton" NOT highlighted
@@ -528,7 +530,7 @@ Save as: assets/images/posts/typescript-provider/semantic-analysis.png
 
 ## Integration with Konveyor AI
 
-The TypeScript provider enhances AI-assisted migration:
+The nodejs provider enhances AI-assisted migration:
 
 1. **More Precise Violations:** Semantic analysis gives better context
 2. **Better AI Suggestions:** AI sees actual code structure, not just text
@@ -537,11 +539,11 @@ The TypeScript provider enhances AI-assisted migration:
 
 Example workflow:
 ```bash
-# 1. Generate rules with TypeScript support
+# 1. Generate rules with nodejs support
 python src/rule_generator/main.py --guide-url <url>
 
-# 2. Run analysis with TypeScript provider
-konveyor-analyzer --provider-settings=typescript-provider-settings.json
+# 2. Run analysis with nodejs provider
+konveyor-analyzer --provider-settings=nodejs-provider-settings.json
 
 # 3. Use Konveyor AI to suggest fixes
 # AI sees semantic violations with precise locations
@@ -551,12 +553,12 @@ konveyor-analyzer --provider-settings=typescript-provider-settings.json
 
 ## Conclusion
 
-The TypeScript provider transforms Konveyor Analyzer from a text pattern matcher into a **semantic code analyzer** for TypeScript/React projects.
+The nodejs provider transforms Konveyor Analyzer from a text pattern matcher into a **semantic code analyzer** for TypeScript/React projects.
 
 **Key Takeaways:**
 
-1. **Use both providers:** TypeScript for semantic analysis, builtin for text patterns
-2. **Know the limitations:** TypeScript provider only finds top-level symbols
+1. **Use both providers:** nodejs for semantic analysis, builtin for text patterns
+2. **Know the limitations:** nodejs provider only finds top-level symbols
 3. **Exclude node_modules:** Critical for performance
 4. **Brace expansion:** Use `*.{ts,tsx}` for concise file patterns
 5. **Test your rules:** Verify both providers work correctly
@@ -565,15 +567,15 @@ Combined with AI-generated rules and Konveyor AI assistance, this creates a powe
 
 ## Next Steps
 
-1. **Try it yourself:** Install TypeScript provider and run on your codebase
-2. **Generate TypeScript rules:** Use analyzer-rule-generator with your migration guide
-3. **Contribute:** Submit fixes to analyzer-lsp (like the [TypeScript provider PR](https://github.com/konveyor/analyzer-lsp/pull/930))
+1. **Try it yourself:** Install nodejs provider and run on your codebase
+2. **Generate nodejs rules:** Use analyzer-rule-generator with your migration guide
+3. **Contribute:** Submit fixes to analyzer-lsp (like the [nodejs provider PR](https://github.com/konveyor/analyzer-lsp/pull/930))
 4. **Share results:** Let the community know how well it works for your migration
 
 ## Resources
 
 - [Analyzer Rule Generator](https://github.com/tsanders-rh/analyzer-rule-generator)
-- [TypeScript Provider PR](https://github.com/konveyor/analyzer-lsp/pull/930)
+- [nodejs Provider PR](https://github.com/konveyor/analyzer-lsp/pull/930)
 - [Konveyor Analyzer Documentation](https://github.com/konveyor/analyzer-lsp)
 - [Previous Post: Automating UI Migrations with AI](link-to-first-post)
 
