@@ -293,6 +293,8 @@ Let's test the limits. I used the analyzer-rule-generator to process the officia
 
 **Results: 10 rules generated covering ~80-85% of automatable patterns**
 
+> **Want to skip the AI generation step?** A complete, production-validated PatternFly v5→v6 ruleset is available ready-to-use in the [analyzer-rule-generator examples](https://github.com/tsanders-rh/analyzer-rule-generator/tree/main/examples/rulesets/patternfly-v5-to-v6). This ruleset has been tested against tackle2-ui (66K+ lines) and found 1,324 violations. You can download and use it directly without generating your own rules.
+
 > **Important:** The nodejs provider doesn't increase the **number** of rules generated from the migration guide - it improves the **quality** of results. The AI generator creates the same 10 rules, but automatically chooses `nodejs.referenced` for component symbols (more accurate, faster) and `builtin.filecontent` for CSS/props/methods (necessary for patterns nodejs can't find). This means fewer false positives and faster analysis without writing extra rules.
 
 ```bash
@@ -514,16 +516,39 @@ kantra analyze \
 
 This is the easiest way for users to analyze their PatternFly applications without dealing with provider setup.
 
-## Generating Rules with nodejs Support
+## Using or Generating Rules with nodejs Support
 
-The analyzer-rule-generator automatically determines when to use nodejs provider vs builtin provider. **You get the same number of rules**, but the AI chooses the best provider for each pattern:
+### Option 1: Use Pre-Generated PatternFly Rules (Quickest)
+
+For PatternFly v5→v6 migrations, a complete, validated ruleset is ready to use:
+
+```bash
+# Download the ruleset
+curl -O https://raw.githubusercontent.com/tsanders-rh/analyzer-rule-generator/main/examples/rulesets/patternfly-v5-to-v6/patternfly-v5-to-v6.yaml
+
+# Run analysis with kantra
+kantra analyze \
+  --input /path/to/your/patternfly-app \
+  --rules patternfly-v5-to-v6.yaml \
+  --output /path/to/output-dir
+```
+
+**This ruleset includes:**
+- 10 migration rules with nodejs + builtin providers
+- Validated against tackle2-ui (66K+ lines)
+- Comprehensive README with usage instructions
+- [View on GitHub](https://github.com/tsanders-rh/analyzer-rule-generator/tree/main/examples/rulesets/patternfly-v5-to-v6)
+
+### Option 2: Generate Custom Rules for Other Migrations
+
+For migrations beyond PatternFly, the analyzer-rule-generator automatically determines when to use nodejs provider vs builtin provider. **You get the same number of rules**, but the AI chooses the best provider for each pattern:
 
 ```bash
 python src/rule_generator/main.py \
-  --guide-url "https://github.com/patternfly/patternfly-react/blob/main/packages/react-core/UPGRADE-GUIDE-v6.md" \
-  --source-version "patternfly-v5" \
-  --target-version "patternfly-v6" \
-  --output-dir examples/output/patternfly-v6/
+  --guide-url "https://your-framework.com/migration-guide" \
+  --source-version "v1" \
+  --target-version "v2" \
+  --output-dir examples/output/custom-migration/
 ```
 
 The generator will:
@@ -787,10 +812,11 @@ Combined with AI-generated rules and Konveyor AI assistance, this creates a powe
 
 ## Next Steps
 
-1. **Try it yourself:** Install nodejs provider and run on your codebase
-2. **Generate nodejs rules:** Use analyzer-rule-generator with your migration guide
-3. **Contribute:** Submit fixes to analyzer-lsp (like the [nodejs provider PR](https://github.com/konveyor/analyzer-lsp/pull/930))
-4. **Share results:** Let the community know how well it works for your migration
+1. **PatternFly migrations:** Download the [pre-generated ruleset](https://github.com/tsanders-rh/analyzer-rule-generator/tree/main/examples/rulesets/patternfly-v5-to-v6) and run it on your codebase today
+2. **Other frameworks:** Use analyzer-rule-generator to create custom rules for your migration guide
+3. **Try it yourself:** Install nodejs provider and test the semantic analysis capabilities
+4. **Contribute:** Submit fixes to analyzer-lsp (like the [nodejs provider PR](https://github.com/konveyor/analyzer-lsp/pull/930))
+5. **Share results:** Let the community know how well it works for your migration
 
 ---
 
@@ -800,8 +826,9 @@ Combined with AI-generated rules and Konveyor AI assistance, this creates a powe
 
 ## Resources
 
-- [Analyzer Rule Generator](https://github.com/tsanders-rh/analyzer-rule-generator)
-- [nodejs Provider PR](https://github.com/konveyor/analyzer-lsp/pull/930)
+- [PatternFly v5→v6 Migration Ruleset](https://github.com/tsanders-rh/analyzer-rule-generator/tree/main/examples/rulesets/patternfly-v5-to-v6) - Ready-to-use, production-validated
+- [Analyzer Rule Generator](https://github.com/tsanders-rh/analyzer-rule-generator) - Generate custom migration rules with AI
+- [nodejs Provider PR](https://github.com/konveyor/analyzer-lsp/pull/930) - Enable TypeScript/React semantic analysis
 - [Konveyor Analyzer Documentation](https://github.com/konveyor/analyzer-lsp)
 - [Previous Post: Automating UI Migrations with AI](/migration/ai/konveyor/patternfly/2025/10/22/automating-ui-migrations-ai-analyzer-rules.html)
 
