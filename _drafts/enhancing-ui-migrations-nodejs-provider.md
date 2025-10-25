@@ -4,7 +4,7 @@ title: "Enhancing UI Migration Rules with Node.js Provider Support"
 date: 2025-10-21
 categories: [migration, ai, konveyor, typescript]
 tags: [migration, typescript, konveyor, static-analysis, semantic-analysis, patternfly, react]
-excerpt: "Moving beyond text pattern matching: how the TypeScript provider enables semantic code analysis for more accurate, faster UI migrations"
+excerpt: "Moving beyond text pattern matching: how the Node.js provider enables semantic code analysis for more accurate, faster UI migrations"
 header:
   overlay_color: "#333"
   overlay_filter: "0.5"
@@ -735,6 +735,12 @@ Combined with AI-generated rules and Konveyor AI assistance, this creates a powe
 2. **Generate nodejs rules:** Use analyzer-rule-generator with your migration guide
 3. **Contribute:** Submit fixes to analyzer-lsp (like the [nodejs provider PR](https://github.com/konveyor/analyzer-lsp/pull/930))
 4. **Share results:** Let the community know how well it works for your migration
+
+---
+
+**Coming Next:** In my next post, I'll walk through using **Konveyor AI** to assist with refactoring the violations found during analysis, showing how AI can help automatically fix the migration issues detected by these rules.
+
+---
 
 ## Resources
 
