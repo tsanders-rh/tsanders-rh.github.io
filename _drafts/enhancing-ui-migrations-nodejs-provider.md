@@ -293,6 +293,8 @@ Let's test the limits. I used the analyzer-rule-generator to process the officia
 
 **Results: 10 rules generated covering ~80-85% of automatable patterns**
 
+> **Important:** The nodejs provider doesn't increase the **number** of rules generated from the migration guide - it improves the **quality** of results. The AI generator creates the same 10 rules, but automatically chooses `nodejs.referenced` for component symbols (more accurate, faster) and `builtin.filecontent` for CSS/props/methods (necessary for patterns nodejs can't find). This means fewer false positives and faster analysis without writing extra rules.
+
 ```bash
 python scripts/generate_rules.py \
   --guide https://www.patternfly.org/get-started/upgrade/ \
@@ -514,7 +516,7 @@ This is the easiest way for users to analyze their PatternFly applications witho
 
 ## Generating Rules with nodejs Support
 
-The analyzer-rule-generator automatically determines when to use nodejs provider vs builtin provider:
+The analyzer-rule-generator automatically determines when to use nodejs provider vs builtin provider. **You get the same number of rules**, but the AI chooses the best provider for each pattern:
 
 ```bash
 python src/rule_generator/main.py \
@@ -529,6 +531,8 @@ The generator will:
 - ✅ Use `builtin.filecontent` for methods, props, types, and complex patterns
 - ✅ Use regex patterns like `\.(j|t)sx?$` for file matching with builtin provider
 - ✅ Create a mix of both provider types for comprehensive coverage
+
+**Key insight:** The nodejs provider enables **smarter rule generation**, not **more rules**. The same migration guide produces the same number of rules, but each rule uses the optimal provider for better accuracy and performance.
 
 ## Performance Comparison
 
