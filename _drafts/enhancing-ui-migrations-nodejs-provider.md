@@ -467,6 +467,7 @@ Save as: assets/images/posts/typescript-provider/provider-settings.png
 
 ### Running Analysis with nodejs Provider
 
+**For development/testing:**
 ```bash
 konveyor-analyzer \
   --provider-settings=nodejs-provider-settings.json \
@@ -474,6 +475,37 @@ konveyor-analyzer \
   --output-file=analysis-output.yaml \
   --verbose=1
 ```
+
+**For end users (recommended):**
+
+Most users won't run `konveyor-analyzer` directly. Instead, they use **kantra**, which automatically handles provider containers:
+
+```bash
+# Install kantra CLI
+# Download from: https://github.com/konveyor/kantra/releases
+
+# Run analysis on your PatternFly application
+kantra analyze \
+  --input /path/to/your/patternfly-app \
+  --rules /path/to/patternfly-v5-to-v6-migration.yaml \
+  --output /path/to/output-dir
+```
+
+**What kantra does automatically:**
+1. Detects TypeScript/JavaScript files in your application
+2. Pulls the `generic-external-provider` container (includes nodejs/TypeScript support)
+3. Pulls the `analyzer-lsp` container
+4. Starts all provider containers in a pod
+5. Runs analysis and generates output
+
+**Important:** The `--run-local` flag only works for Java analysis. For TypeScript/React/PatternFly projects, kantra **must use container mode** (which is the default for non-Java projects).
+
+**Prerequisites for kantra:**
+- Podman 4+ or Docker 24+ installed
+- Internet connection (to pull container images)
+- No need to manually install TypeScript Language Server or build providers
+
+This is the easiest way for users to analyze their PatternFly applications without dealing with provider setup.
 
 ## Generating Rules with nodejs Support
 
