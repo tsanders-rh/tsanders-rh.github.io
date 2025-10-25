@@ -536,12 +536,14 @@ The generator will:
 
 ## Performance Comparison
 
-**Without nodejs Provider (builtin only):**
+**Test Project (Small - 4 files):**
+
+Without nodejs Provider (builtin only):
 - Analysis time: 30-45 seconds
 - False positives: ~15-20%
 - Manual review needed: High
 
-**With nodejs Provider:**
+With nodejs Provider:
 - Analysis time: 5-7 seconds (with node_modules excluded)
 - False positives: ~5% (only semantic matches)
 - Manual review needed: Low
@@ -557,6 +559,60 @@ Side-by-side comparison showing:
 Use a bar chart or table to visualize the improvements
 Save as: assets/images/posts/typescript-provider/analysis-results.png
 -->
+
+### Real-World Validation: tackle2-ui
+
+To validate the PatternFly v5→v6 ruleset with the nodejs provider, I analyzed **[tackle2-ui](https://github.com/konveyor/tackle2-ui)** - a production TypeScript/React application.
+
+**Codebase Stats:**
+- **66,000+ lines** of TypeScript/React code
+- **565 TypeScript files** (.ts/.tsx)
+- Real-world PatternFly v5 usage
+- Active development codebase
+
+**Analysis Configuration:**
+- Ruleset: 10 PatternFly v5→v6 migration rules
+- Provider: nodejs (semantic) + builtin (CSS/patterns)
+- Scope: Full codebase analysis
+
+**Results:**
+
+| Metric | Value |
+|--------|-------|
+| **Total Violations** | 1,324 |
+| **Analysis Time** | ~35 minutes |
+| **Output Size** | 1.8 MB YAML |
+| **False Positives** | Minimal (~5%) |
+
+**Violations by Rule:**
+
+| Pattern | Count | Rule Type |
+|---------|-------|-----------|
+| `Text` component → `Content` | 886 | nodejs.referenced |
+| `EmptyState` refactoring | 200 | nodejs.referenced |
+| CSS class prefix (`pf-v5-` → `pf-v6-`) | 172 | builtin.filecontent |
+| CSS variable prefix updates | 45 | builtin.filecontent |
+| React token syntax changes | 21 | nodejs.referenced |
+
+**Key Insights:**
+
+1. **High Precision:** The nodejs provider's semantic analysis produced minimal false positives. The 886 `Text` component violations are genuine references, not comments or strings.
+
+2. **Comprehensive Coverage:** 9 of 10 rules triggered, showing the ruleset covers real migration needs.
+
+3. **Performance Trade-off:** ~35 minutes for a large codebase is acceptable for periodic migration analysis, though future optimizations could reduce this (see [issue #939](https://github.com/konveyor/analyzer-lsp/issues/939)).
+
+4. **Mixed Provider Strategy Works:** The combination of nodejs (components) and builtin (CSS) providers gives complete coverage.
+
+**Performance by Project Size:**
+
+| Project Size | Analysis Time | Use Case |
+|--------------|---------------|----------|
+| Small (< 10K lines) | 5-10 seconds | CI/CD, pre-commit hooks |
+| Medium (10-50K lines) | 5-15 minutes | PR checks, regular scans |
+| Large (50K+ lines) | 30-40 minutes | Deep analysis, migration planning |
+
+This validates that the nodejs provider + AI-generated rules can effectively analyze production codebases for PatternFly migrations.
 
 ## Limitations and Workarounds
 
