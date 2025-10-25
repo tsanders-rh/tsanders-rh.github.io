@@ -146,22 +146,27 @@ For these cases, you still need the builtin provider with regex patterns.
 
 ### nodejs Provider Capabilities Matrix
 
+The key difference: **nodejs provider uses semantic analysis** (understands code structure) while **builtin provider uses text pattern matching** (regex search).
+
 | Feature                    | nodejs Provider | Builtin Provider | Notes                           |
 |---------------------------|---------------------|------------------|---------------------------------|
-| **Functions**             | ✅ Yes              | ✅ Yes           | nodejs: semantic only       |
-| **Classes**               | ✅ Yes              | ✅ Yes           | nodejs: semantic only       |
-| **Variables/Constants**   | ✅ Yes              | ✅ Yes           | nodejs: semantic only       |
-| **Imports**               | ✅ Yes              | ✅ Yes           | nodejs more precise         |
-| **JSX Components**        | ✅ Yes              | ✅ Yes           | nodejs avoids false matches |
+| **Match Quality**         | ✅ Semantic only    | ⚠️ Text patterns  | nodejs ignores comments/strings |
+| **Functions**             | ✅ Yes              | ✅ Yes           | nodejs: actual symbol refs only |
+| **Classes**               | ✅ Yes              | ✅ Yes           | nodejs: actual symbol refs only |
+| **Variables/Constants**   | ✅ Yes              | ✅ Yes           | nodejs: actual symbol refs only |
+| **Imports**               | ✅ Yes              | ✅ Yes           | nodejs: knows import context    |
+| **JSX Components**        | ✅ Yes              | ✅ Yes           | nodejs: semantic component refs |
 | **Class Methods**         | ❌ No               | ✅ Yes           | Must use builtin                |
 | **Object Properties**     | ❌ No               | ✅ Yes           | Must use builtin                |
 | **Type Annotations**      | ❌ No               | ✅ Yes           | Must use builtin                |
 | **Imported Types**        | ❌ No               | ✅ Yes           | Must use builtin                |
 | **JSX Props**             | ❌ No               | ✅ Yes           | Must use builtin                |
-| **Comments**              | ❌ Ignored          | ✅ Matches       | nodejs advantage            |
-| **String Literals**       | ❌ Ignored          | ✅ Matches       | nodejs advantage            |
-| **False Positive Rate**   | ~5%                 | ~15-20%          | nodejs more accurate        |
-| **Analysis Speed**        | 5-7s                | 30-45s           | nodejs faster (when scoped) |
+| **Comments**              | ❌ Ignored          | ✅ Matches       | nodejs avoids false positives   |
+| **String Literals**       | ❌ Ignored          | ✅ Matches       | nodejs avoids false positives   |
+| **False Positive Rate**   | ~5%                 | ~15-20%          | nodejs 3-4x more accurate       |
+| **Analysis Speed**        | 5-7s                | 30-45s           | nodejs 6x faster (when scoped)  |
+
+**Why this matters:** Both providers can find top-level symbols, but the **nodejs provider is more accurate and faster** because it understands code semantically instead of just matching text patterns. This means fewer false positives to review manually.
 
 <!--
 TABLE: nodejs Provider Capabilities Matrix
