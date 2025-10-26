@@ -19,6 +19,9 @@ author:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/tsanders-rh"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/todd-sanders-42b1014"
     - label: "Website"
       icon: "fas fa-fw fa-link"
       url: "https://www.migandmod.net"
@@ -29,6 +32,9 @@ footer:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/tsanders-rh"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/todd-sanders-42b1014"
 
 # Build Settings
 markdown: kramdown
