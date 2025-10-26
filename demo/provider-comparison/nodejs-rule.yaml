@@ -1,0 +1,9 @@
+- ruleID: test-nodejs-oldbutton
+  description: Find OldButton with nodejs provider
+  when:
+    nodejs.referenced:
+      pattern: "OldButton"
+  message: |
+    Found OldButton (nodejs provider - semantic analysis)
+  effort: 1
+  category: potential

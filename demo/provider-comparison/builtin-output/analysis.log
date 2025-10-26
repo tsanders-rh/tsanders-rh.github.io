@@ -1,0 +1,4 @@
+time="2025-10-26T00:05:22Z" level=info msg="inject span info" carrier="{}"
+time="2025-10-26T00:05:22Z" level=info msg="Adding Carrier span info to context" worker=3
+time="2025-10-26T00:05:22Z" level=info msg="processing rule" logger=process-rule ruleID=test-builtin-oldbutton worker=3
+time="2025-10-26T00:05:22Z" level=info msg="rule returned" ruleID=test-builtin-oldbutton

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Semantic Analysis Example</title>
+    <style>
+        body {
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 0;
+            margin: 0;
+        }
+        .editor-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        .title-bar {
+            background: #323233;
+            padding: 10px 20px;
+            border-bottom: 1px solid #252526;
+            color: #cccccc;
+            font-size: 13px;
+        }
+        .title {
+            color: #4fc3f7;
+            font-weight: 600;
+        }
+        .content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+        .editor {
+            flex: 1;
+            background: #1e1e1e;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .sidebar {
+            width: 400px;
+            background: #252526;
+            border-left: 1px solid #3e3e42;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .line {
+            display: flex;
+            padding: 2px 0;
+            line-height: 1.6;
+            font-size: 14px;
+            position: relative;
+        }
+        .line-number {
+            color: #858585;
+            width: 40px;
+            text-align: right;
+            margin-right: 20px;
+            user-select: none;
+        }
+        .code {
+            flex: 1;
+            position: relative;
+        }
+        .highlight {
+            background: rgba(76, 175, 80, 0.2);
+            border-bottom: 2px solid #4caf50;
+            display: inline-block;
+            cursor: pointer;
+            position: relative;
+        }
+        .unhighlighted {
+            opacity: 0.6;
+        }
+        .keyword { color: #569cd6; }
+        .string { color: #ce9178; }
+        .comment { color: #6a9955; font-style: italic; }
+        .type { color: #4ec9b0; }
+        .function { color: #dcdcaa; }
+        .jsx-tag { color: #4ec9b0; }
+        .jsx-attr { color: #9cdcfe; }
+        .violation-indicator {
+            position: absolute;
+            left: -15px;
+            color: #4caf50;
+            font-weight: bold;
+        }
+        .tooltip {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #2d2d30;
+            border: 1px solid #4caf50;
+            border-radius: 4px;
+            padding: 10px;
+            margin-top: 5px;
+            min-width: 300px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            z-index: 1000;
+            font-size: 12px;
+            display: none;
+        }
+        .highlight:hover .tooltip {
+            display: block;
+        }
+        .tooltip-title {
+            color: #4fc3f7;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .tooltip-message {
+            color: #d4d4d4;
+            line-height: 1.5;
+        }
+        .sidebar h3 {
+            color: #4fc3f7;
+            font-size: 14px;
+            margin: 0 0 15px 0;
+            font-weight: 600;
+        }
+        .problem {
+            background: #2d2d30;
+            border-left: 3px solid #4caf50;
+            padding: 12px;
+            margin-bottom: 10px;
+            font-size: 12px;
+            border-radius: 3px;
+        }
+        .problem-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .problem-icon {
+            color: #4caf50;
+            margin-right: 8px;
+            font-weight: bold;
+        }
+        .problem-file {
+            color: #9cdcfe;
+            font-size: 11px;
+        }
+        .problem-location {
+            color: #858585;
+            font-size: 11px;
+            margin-top: 4px;
+        }
+        .problem-message {
+            color: #d4d4d4;
+            line-height: 1.5;
+            margin-top: 8px;
+        }
+        .legend {
+            background: #2d2d30;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 4px;
+        }
+        .legend-title {
+            color: #4fc3f7;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+            font-size: 12px;
+        }
+        .legend-indicator {
+            width: 20px;
+            height: 3px;
+            margin-right: 10px;
+        }
+        .legend-indicator.detected {
+            background: #4caf50;
+        }
+        .legend-indicator.ignored {
+            background: #858585;
+        }
+    </style>
+</head>
+<body>
+    <div class="editor-container">
+        <div class="title-bar">
+            <span class="title">Semantic Analysis</span> • TestComponent.tsx • nodejs Provider
+        </div>
+
+        <div class="content">
+            <div class="editor">
+                <div class="line">
+                    <span class="line-number">1</span>
+                    <span class="code"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span>
+                </div>
+
+                <div class="line">
+                    <span class="violation-indicator">●</span>
+                    <span class="line-number">2</span>
+                    <span class="code">
+                        <span class="keyword">import</span> { <span class="highlight">OldButton<div class="tooltip">
+                            <div class="tooltip-title">Migration Required</div>
+                            <div class="tooltip-message">OldButton is deprecated. Replace with NewButton component.</div>
+                        </div></span> } <span class="keyword">from</span> <span class="string">'@patternfly/react-core'</span>;
+                    </span>
+                </div>
+
+                <div class="line">
+                    <span class="line-number">3</span>
+                    <span class="code"></span>
+                </div>
+
+                <div class="line">
+                    <span class="line-number">4</span>
+                    <span class="code"><span class="keyword">export const</span> <span class="function">TestComponent</span> = () => {</span>
+                </div>
+
+                <div class="line">
+                    <span class="line-number">5</span>
+                    <span class="code unhighlighted">  <span class="comment">// TODO: Update OldButton later</span></span>
+                </div>
+
+                <div class="line">
+                    <span class="line-number">6</span>
+                    <span class="code unhighlighted">  <span class="keyword">const</span> myOldButton = <span class="string">'something'</span>;</span>
+                </div>
+
+                <div class="line">
+                    <span class="line-number">7</span>
+                    <span class="code unhighlighted">  <span class="keyword">const</span> docs = <span class="string">"Check OldButton docs"</span>;</span>
+                </div>
+
+                <div class="line">
+                    <span class="line-number">8</span>
+                    <span class="code"></span>
+                </div>
+
+                <div class="line">
+                    <span class="line-number">9</span>
+                    <span class="code">  <span class="keyword">return</span> (</span>
+                </div>
+
+                <div class="line">
+                    <span class="line-number">10</span>
+                    <span class="code">    &lt;<span class="jsx-tag">div</span>&gt;</span>
+                </div>
+
+                <div class="line">
+                    <span class="violation-indicator">●</span>
+                    <span class="line-number">11</span>
+                    <span class="code">      &lt;<span class="highlight"><span class="jsx-tag">OldButton</span><div class="tooltip">
+                        <div class="tooltip-title">Migration Required</div>
+                        <div class="tooltip-message">OldButton is deprecated. Replace with NewButton component.</div>
+                    </div></span> <span class="jsx-attr">variant</span>=<span class="string">"primary"</span>&gt;Click me&lt;/<span class="highlight"><span class="jsx-tag">OldButton</span></span>&gt;</span>
+                </div>
+
+                <div class="line">
+                    <span class="line-number">12</span>
+                    <span class="code unhighlighted">      {<span class="comment">/* OldButton is deprecated */</span>}</span>
+                </div>
+
+                <div class="line">
+                    <span class="line-number">13</span>
+                    <span class="code">    &lt;/<span class="jsx-tag">div</span>&gt;</span>
+                </div>
+
+                <div class="line">
+                    <span class="line-number">14</span>
+                    <span class="code">  );</span>
+                </div>
+
+                <div class="line">
+                    <span class="line-number">15</span>
+                    <span class="code">};</span>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <h3>PROBLEMS (2)</h3>
+
+                <div class="problem">
+                    <div class="problem-header">
+                        <span class="problem-icon">●</span>
+                        <span class="problem-file">TestComponent.tsx</span>
+                    </div>
+                    <div class="problem-location">Line 2, Column 10</div>
+                    <div class="problem-message">
+                        <strong>OldButton</strong> component is deprecated in PatternFly v6.<br><br>
+                        Replace import with: <code style="color: #ce9178;">import { NewButton } from '@patternfly/react-core'</code>
+                    </div>
+                </div>
+
+                <div class="problem">
+                    <div class="problem-header">
+                        <span class="problem-icon">●</span>
+                        <span class="problem-file">TestComponent.tsx</span>
+                    </div>
+                    <div class="problem-location">Line 11, Column 7</div>
+                    <div class="problem-message">
+                        <strong>OldButton</strong> component usage detected.<br><br>
+                        Update JSX to: <code style="color: #ce9178;">&lt;NewButton variant="primary"&gt;</code>
+                    </div>
+                </div>
+
+                <div class="legend">
+                    <div class="legend-title">Semantic Analysis</div>
+                    <div class="legend-item">
+                        <div class="legend-indicator detected"></div>
+                        <span style="color: #4caf50;">Detected:</span> Actual code references only
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-indicator ignored"></div>
+                        <span style="color: #858585;">Ignored:</span> Comments, strings, unrelated variables
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

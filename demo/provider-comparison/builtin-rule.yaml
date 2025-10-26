@@ -1,0 +1,10 @@
+- ruleID: test-builtin-oldbutton
+  description: Find OldButton with builtin provider
+  when:
+    builtin.filecontent:
+      pattern: "OldButton"
+      filePattern: "*.tsx"
+  message: |
+    Found OldButton (builtin provider - text pattern matching)
+  effort: 1
+  category: potential

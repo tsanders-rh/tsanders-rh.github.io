@@ -39,7 +39,7 @@ In [Part 1](/migration/ai/konveyor/patternfly/2025/10/22/automating-ui-migration
 - Time saved: ~5 hours of manual review
 - **Ready for AI automation:** ✅ High-confidence violations
 
-[Jump to validation results →](#real-world-validation-tackle2-ui) | [Try the ruleset now →](#try-it-in-5-minutes)
+[Jump to validation results →](#real-world-validation-ready-for-ai-automation) | [Try the ruleset now →](#try-it-in-5-minutes)
 
 ## The Problem: False Positives Block Automation
 
@@ -116,7 +116,7 @@ kantra analyze \
 - Same 10 rules, but smarter provider selection
 - **Ready for Part 3:** High-quality violations for AI-assisted refactoring
 
-**Already validated on:** tackle2-ui (66K lines) - [See results →](#real-world-validation-tackle2-ui)
+**Already validated on:** tackle2-ui (66K lines) - [See results →](#real-world-validation-ready-for-ai-automation)
 
 <!--
 SCREENSHOT 1: nodejs vs Builtin Provider Comparison

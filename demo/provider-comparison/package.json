@@ -1,0 +1,8 @@
+{
+  "name": "provider-comparison-demo",
+  "version": "1.0.0",
+  "dependencies": {
+    "react": "^18.0.0",
+    "@patternfly/react-core": "^5.0.0"
+  }
+}

@@ -1,7 +1,7 @@
 ---
 layout: single
 title: "Part 3: Automating PatternFly Migration Fixes with Konveyor AI"
-date: 2025-10-28
+date: 2025-10-21
 categories: [migration, ai, konveyor, patternfly]
 tags: [migration, ai, konveyor, automation, refactoring, patternfly, react]
 excerpt: "The payoff: How Konveyor AI turns 40+ hours of manual refactoring into 3 hours of review using high-precision violations from semantic analysis"
@@ -53,17 +53,17 @@ Now comes the automation: using **Konveyor AI** to automatically refactor those 
 
 Here's how the three parts work together:
 
-```mermaid
+<div class="mermaid">
 graph LR
-    A[Migration Guide] -->|Part 1: AI Rules| B[10 Rules Generated]
-    B -->|Part 2: Semantic Analysis| C[1,324 Violations<br/>95% Precision]
-    C -->|Part 3: Konveyor AI| D[Automated Fixes]
-    D --> E[Review & Apply<br/>~3 hours]
+    A[Migration<br/>Guide] -->|Part 1<br/>Rule Generator| B[10 Rules]
+    B -->|Part 2<br/>Semantic Analysis| C[1,324 Violations<br/>95% Accurate]
+    C -->|Part 3<br/>Konveyor AI| D[Auto Fixes]
+    D --> E[Review<br/>3 hours]
 
-    style C fill:#51cf66,stroke:#2f9e44,stroke-width:2px
-    style D fill:#ffb84d,stroke:#f59f00,stroke-width:3px
-    style E fill:#9775fa,stroke:#7950f2,stroke-width:2px
-```
+    style C fill:#51cf66,color:#000
+    style D fill:#ffb84d,color:#000
+    style E fill:#9775fa,color:#fff
+</div>
 
 **The key insight:** Garbage in, garbage out. The 95% precision from Part 2 is why Part 3 works. With 20% false positives (text matching), AI would waste time generating bad fixes and erode your trust.
 
