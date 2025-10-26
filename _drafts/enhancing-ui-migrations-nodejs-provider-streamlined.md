@@ -4,7 +4,7 @@ title: "Part 2: Improving PatternFly Migration Detection with Semantic Analysis"
 date: 2025-10-21
 categories: [migration, ai, konveyor, typescript]
 tags: [migration, typescript, konveyor, static-analysis, semantic-analysis, patternfly, react]
-excerpt: "Why accuracy matters: How semantic analysis reduced false positives by 75%, setting the stage for AI-assisted automated refactoring"
+excerpt: "Why accuracy matters: How semantic analysis reduced false positives by 75%, setting the stage for AI-assisted refactoring"
 header:
   overlay_color: "#333"
   overlay_filter: "0.5"
@@ -21,25 +21,25 @@ classes: wide
 
 ## Introduction
 
-**The journey to fully automated migrations has three steps:**
+**The journey to AI-assisted migrations has three steps:**
 
 1. **Find the issues** → AI-generated rules (Part 1)
 2. **Find them accurately** → Semantic analysis (Part 2 - this post)
-3. **Fix them automatically** → AI-assisted refactoring (Part 3)
+3. **Fix them with AI assistance** → AI-guided refactoring (Part 3)
 
 In [Part 1](/migration/ai/konveyor/patternfly/2025/10/22/automating-ui-migrations-ai-analyzer-rules.html), we generated PatternFly v5→v6 migration rules from documentation using AI. It worked, but text-based pattern matching produced **15-20% false positives**.
 
-**Why does accuracy matter?** Because in Part 3, we'll use Konveyor AI to automatically refactor the violations. False positives waste AI tokens, produce incorrect fixes, and erode trust in automation.
+**Why does accuracy matter?** Because in Part 3, we'll use Konveyor AI to assist with refactoring the violations. False positives waste AI tokens, produce incorrect suggestions, and erode trust in AI assistance.
 
-**Part 2 goal:** Get violation accuracy to 95%+ so AI can confidently automate fixes.
+**Part 2 goal:** Get violation accuracy to 95%+ so AI can confidently assist with fixes.
 
 **Results from tackle2-ui (66K lines):**
 - False positives: 20% → 5% (75% reduction)
 - Manual review: ~320 violations → ~66 violations
 - Time saved: ~5 hours of manual review
-- **Ready for AI automation:** ✅ High-confidence violations
+- **Ready for AI assistance:** ✅ High-confidence violations
 
-[Jump to validation results →](#real-world-validation-ready-for-ai-automation) | [Try the ruleset now →](#try-it-in-5-minutes)
+[Jump to validation results →](#real-world-validation-ready-for-ai-assistance) | [Try the ruleset now →](#try-it-in-5-minutes)
 
 ---
 
@@ -123,27 +123,27 @@ kantra analyze \
 - Same 10 rules, but smarter provider selection
 - **Ready for Part 3:** High-quality violations for AI-assisted refactoring
 
-**Already validated on:** tackle2-ui (66K lines) - [See results →](#real-world-validation-ready-for-ai-automation)
+**Already validated on:** tackle2-ui (66K lines) - [See results →](#real-world-validation-ready-for-ai-assistance)
 
 ---
 
-## Real-World Validation: Ready for AI Automation?
+## Real-World Validation: Ready for AI Assistance?
 
 I validated semantic analysis against **[tackle2-ui](https://github.com/konveyor/tackle2-ui)** - Konveyor's production application with 66,000+ lines and 565 TypeScript files.
 
 **Results Comparison:**
 
-| Metric | Text Matching (Part 1) | Semantic Analysis (Part 2) | Impact on AI Automation |
+| Metric | Text Matching (Part 1) | Semantic Analysis (Part 2) | Impact on AI Assistance |
 |--------|----------------------|---------------------------|--------------------------|
 | Total Violations | ~1,600 | 1,324 | More focused scope |
-| False Positives | ~20% (320) | ~5% (66) | **75% fewer bad fixes** |
+| False Positives | ~20% (320) | ~5% (66) | **75% fewer bad suggestions** |
 | Comments/Strings | Flagged ❌ | Ignored ✅ | AI won't change docs |
 | Violation Quality | Mixed | High precision | AI can trust location |
-| **Ready for AI?** | ⚠️ Risky | ✅ Yes | **95% fix confidence** |
+| **Ready for AI?** | ⚠️ Risky | ✅ Yes | **95% suggestion confidence** |
 
 **Violations by Rule:**
 
-| Pattern | Count | Rule Type | AI Automation Quality |
+| Pattern | Count | Rule Type | AI Assistance Quality |
 |---------|-------|-----------|----------------------|
 | `Text` component → `Content` | 886 | nodejs.referenced | ✅ All genuine code refs |
 | `EmptyState` refactoring | 200 | nodejs.referenced | ✅ Precise locations |
@@ -155,7 +155,7 @@ I validated semantic analysis against **[tackle2-ui](https://github.com/konveyor
 
 **Key Insights:**
 
-1. **High Precision Enables Automation:** The 886 `Text` component violations are all genuine code references - exactly what AI needs.
+1. **High Precision Enables AI Assistance:** The 886 `Text` component violations are all genuine code references - exactly what AI needs.
 
 2. **The Math on False Positives:**
    - Text matching: 320 false positives × 2 min = **10.6 hours wasted**
@@ -286,9 +286,9 @@ kantra automatically:
 
 ---
 
-## Conclusion: Setting Up for Automation
+## Conclusion: Setting Up for AI-Assisted Migration
 
-**This three-part series builds toward fully automated migrations:**
+**This three-part series builds toward AI-assisted migrations:**
 
 **Part 1 - Generate Rules:**
 - ✅ AI extracts patterns from migration guides
@@ -301,27 +301,27 @@ kantra automatically:
 - ✅ Production-ready ruleset available
 - **✅ Violations are now AI-ready**
 
-**Part 3 - Automate Fixes** ([next post](/migration/ai/konveyor/patternfly/automating-patternfly-fixes-konveyor-ai.html)):
-- 🔜 Use Konveyor AI to automatically refactor violations
+**Part 3 - AI-Assisted Fixes** ([next post](/migration/ai/konveyor/patternfly/automating-patternfly-fixes-konveyor-ai.html)):
+- 🔜 Use Konveyor AI IDE extension to assist with refactoring
 - 🔜 Leverage the 95% accuracy from semantic analysis
-- 🔜 Turn 40+ hours of manual work into ~3 hours of review
-- 🔜 Complete the automation pipeline
+- 🔜 Significantly reduce manual refactoring time
+- 🔜 Complete the AI-assisted migration workflow
 
-**Why this progression matters:** You can't automate fixes reliably with 20% false positives. The accuracy improvements in Part 2 enable the automation in Part 3.
+**Why this progression matters:** You can't apply AI-assisted fixes reliably with 20% false positives. The accuracy improvements in Part 2 enable effective AI assistance in Part 3.
 
 ---
 
-## Coming in Part 3: Automating the Fixes
+## Coming in Part 3: AI-Assisted Refactoring
 
-Now that we have 1,324 high-precision violations from tackle2-ui, the next post shows how to use **Konveyor AI** to automatically refactor them:
+Now that we have 1,324 high-precision violations from tackle2-ui, the next post shows how to use **Konveyor AI** to assist with refactoring them:
 
 **What I'll cover:**
+- Using Konveyor AI IDE extension to fix violations interactively
 - Feeding semantic violations to Konveyor AI for better context
 - Generating fixes for the 886 `Text` → `Content` component changes
-- Batch processing with confidence thresholds
 - **Measuring the time savings** (spoiler: it's substantial)
 
-**The goal:** Turn 40+ hours of manual refactoring into 3 hours of reviewing AI-suggested fixes.
+**The goal:** Turn 40+ hours of manual refactoring into focused, AI-assisted fixes within your IDE.
 
 **Example from tackle2-ui:**
 ```tsx
@@ -350,12 +350,12 @@ Multiply this by 886 instances, and you see why accuracy matters.
    kantra analyze --input . --rules patternfly-v5-to-v6.yaml
    ```
 
-2. **Share your results:** How many violations? Automation rate? Help improve the tools.
+2. **Share your results:** How many violations? AI assistance effectiveness? Help improve the tools.
 
 **For other migrations:**
 
 1. Generate rules for your framework using the [analyzer-rule-generator](https://github.com/tsanders-rh/analyzer-rule-generator)
-2. Follow the three-part process: Generate → Detect → Automate
+2. Follow the three-part process: Generate → Detect → AI-Assist
 3. Share your rulesets with the community
 
 ---

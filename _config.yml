@@ -1,7 +1,7 @@
 # Site Settings
 title: "Migration & Modernization"
 description: "AI-powered tools and techniques for application modernization"
-url: "https://tsanders-rh.github.io"
+url: "https://www.migandmod.net"
 baseurl: ""
 repository: "tsanders-rh/tsanders-rh.github.io"
 
@@ -21,7 +21,7 @@ author:
       url: "https://github.com/tsanders-rh"
     - label: "Website"
       icon: "fas fa-fw fa-link"
-      url: "https://tsanders-rh.github.io"
+      url: "https://www.migandmod.net"
 
 # Site Footer
 footer:
