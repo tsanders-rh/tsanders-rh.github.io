@@ -34,3 +34,15 @@ html {
 .page__lead {
   max-width: 100% !important;
 }
+
+.page__content table {
+  width: 100% !important;
+  max-width: none !important;
+  table-layout: fixed !important;
+  display: table !important;
+}
+
+.page__content table th,
+.page__content table td {
+  word-wrap: break-word !important;
+}
