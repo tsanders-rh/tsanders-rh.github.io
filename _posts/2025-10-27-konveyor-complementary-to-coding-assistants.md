@@ -376,12 +376,12 @@ We're building MCP integration so teams standardized on specific AI assistants c
 
 ### The Core Problem
 
-Even advanced AI assistants like Claude Code face migration-specific challenges:
+Even advanced AI assistants like Claude Code face migration-specific challenges when used for systematic migration detection:
 
 | Challenge | AI Assistants (Even Claude Code) | Konveyor |
 |-----------|--------------|----------|
 | **Detection method** | Text-based search | Semantic code analysis |
-| **Accuracy** | ~80% | 95%+ |
+| **Accuracy (migration detection)** | ~80% | 95%+ |
 | **False positives** | 15-20% | ~5% |
 | **Migration rulesets** | None (start from scratch) | Production-validated for common frameworks |
 | **Migration knowledge** | Training data (6-12 months old) | Curated, current patterns (solution server) |
@@ -405,7 +405,7 @@ We provide migration infrastructure:
 - **Application modernization** → Add Konveyor's static analysis (via KAI extension or standalone)
 - **Back to development** → Continue with your preferred AI assistant
 
-**Try Konveyor on your next migration.** The 95% vs 80% accuracy difference means hours saved on false positive review - and better AI suggestions because the input is more precise.
+**Try Konveyor on your next migration.** For migration violation detection, semantic analysis (95%+ accuracy) vs. text-based search (~80%) means hours saved on false positive review - and better AI suggestions because the input is more precise.
 
 ---
 
