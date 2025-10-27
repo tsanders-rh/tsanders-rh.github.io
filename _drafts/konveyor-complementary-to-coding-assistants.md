@@ -304,6 +304,23 @@ Konveyor provides migration infrastructure in three layers:
 
 **This isn't "AI vs. Static Analysis"** - it's using both where each is strongest.
 
+**More importantly, this approach de-risks generative AI:**
+
+When AI does both detection and fixes, you get:
+- ❌ Hallucinated violations (AI "finds" issues that don't exist)
+- ❌ Inconsistent results (different runs find different things)
+- ❌ False confidence (AI sounds certain about wrong answers)
+- ❌ Wasted tokens processing false positives
+
+**Konveyor's static-first approach mitigates these risks:**
+- ✅ **Deterministic detection** - Same code = same violations, every time
+- ✅ **Verifiable violations** - Exact line numbers, semantic proof
+- ✅ **AI only suggests fixes** - Violations are verified before AI touches them
+- ✅ **Reduced hallucination** - AI works from precise locations, not vague descriptions
+- ✅ **Cost efficient** - Only process real violations (95% accurate)
+
+**Think of it as "trust but verify" - except the static analysis does the verifying before AI gets involved.**
+
 ---
 
 ## How to Use Konveyor
