@@ -103,30 +103,6 @@ This **only** matches actual code references to the `OldButton` symbol, ignoring
 
 ---
 
-## Try It in 5 Minutes
-
-**No need to generate rules yourself** - I've created a production-validated ruleset ready to use:
-
-```bash
-# Download the ruleset (with nodejs provider)
-curl -O https://raw.githubusercontent.com/tsanders-rh/analyzer-rule-generator/main/examples/rulesets/patternfly-v5-to-v6/patternfly-v5-to-v6.yaml
-
-# Run analysis with kantra (handles provider setup automatically)
-kantra analyze \
-  --input /path/to/your-patternfly-app \
-  --rules patternfly-v5-to-v6.yaml \
-  --output ./analysis-results
-```
-
-**What's different from Part 1:**
-- Semantic analysis reduces false positives from ~20% to ~5%
-- Same 10 rules, but smarter provider selection
-- **Ready for Part 3:** High-quality violations for AI-assisted refactoring
-
-**Already validated on:** tackle2-ui (66K lines) - [See results →](#real-world-validation-ready-for-ai-assistance)
-
----
-
 ## Real-World Validation: Ready for AI Assistance?
 
 I validated semantic analysis against **[tackle2-ui](https://github.com/konveyor/tackle2-ui)** - Konveyor's production application with 66,000+ lines and 565 TypeScript files.
@@ -163,6 +139,29 @@ I validated semantic analysis against **[tackle2-ui](https://github.com/konveyor
    - **Time saved: 8.4 hours** (and AI won't waste tokens on bad violations)
 
 3. **Ready for Part 3:** Each violation includes precise file location, before/after examples, and 95%+ confidence - perfect input for AI-assisted refactoring.
+
+---
+
+## Try It in 5 Minutes
+
+**No need to generate rules yourself** - I've created a production-validated ruleset ready to use:
+
+```bash
+# Download the ruleset (with nodejs provider)
+curl -O https://raw.githubusercontent.com/tsanders-rh/analyzer-rule-generator/main/examples/rulesets/patternfly-v5-to-v6/patternfly-v5-to-v6.yaml
+
+# Run analysis with kantra (handles provider setup automatically)
+kantra analyze \
+  --input /path/to/your-patternfly-app \
+  --rules patternfly-v5-to-v6.yaml \
+  --output ./analysis-results
+```
+
+**What you get:**
+- Same 10 rules, but with semantic analysis for higher accuracy
+- False positives reduced from ~20% to ~5%
+- High-quality violations ready for AI-assisted refactoring in Part 3
+- Already validated on tackle2-ui (66K lines, 1,324 violations)
 
 ---
 
@@ -238,7 +237,7 @@ python scripts/generate_rules.py \
 
 ---
 
-## Setup: It Just Works™
+## Setup: Zero Configuration Required
 
 **For end users (recommended):**
 
@@ -260,29 +259,6 @@ kantra automatically:
 **Prerequisites:** Podman 4+ or Docker 24+ (that's it!)
 
 **For advanced users:** Manual setup with `konveyor-analyzer` - [see advanced guide](https://github.com/konveyor/analyzer-lsp#typescript-provider-setup)
-
----
-
-## Quick Reference
-
-**What nodejs provider does:**
-- ✅ Semantic code analysis via TypeScript LSP
-- ✅ Only matches actual symbol references
-- ✅ Ignores comments, strings, unrelated variables
-- ✅ 95% precision vs 80-85% with text matching
-- ✅ 75% reduction in false positives
-
-**Limitations:**
-- ❌ Can't find methods inside classes
-- ❌ Can't find object properties or type annotations
-- ❌ Slower on very large codebases (30-40 min for 66K lines)
-
-**Use builtin provider for:**
-- CSS/SCSS pattern replacements
-- JSX props and attributes
-- Class methods and properties
-- Type annotations
-- Any pattern nodejs can't find
 
 ---
 
