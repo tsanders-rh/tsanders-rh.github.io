@@ -329,16 +329,18 @@ When AI does both detection and fixes, you get:
 
 **Why this is the best integrated experience:**
 
-```bash
-# Step 1: Run Konveyor analysis (8 seconds)
-kantra analyze --input . --rules spring-boot-2-to-3.yaml
+With KAI, you run analysis directly from your IDE - no separate command-line steps needed.
 
-# Step 2: Open your IDE with KAI extension installed
-# KAI deeply integrates with analyzer results and solution server
+```
+1. Install KAI extension in your IDE (VS Code, IntelliJ, etc.)
+2. Configure your ruleset (e.g., spring-boot-2-to-3.yaml)
+3. Run analysis from within the IDE
+4. Violations appear inline as you code
 ```
 
 **What KAI provides:**
-- **Direct integration with analyzer** - violations appear inline as you code
+- **Run analysis from IDE** - no need to run kantra separately
+- **Inline violation display** - violations appear directly in your code
 - **Solution server context** - right-click on violation → get curated fix patterns
 - **Batch operations** - apply AI-suggested fixes across multiple files
 - **Progress tracking** - see which violations are fixed, which remain
