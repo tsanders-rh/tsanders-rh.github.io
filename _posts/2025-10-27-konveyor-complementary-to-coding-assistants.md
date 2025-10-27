@@ -114,14 +114,14 @@ kantra analyze \
 
 **Konveyor maintains a repository of production-validated, hardened rulesets:**
 
-| Modernization Scenario | Status | Violations Detected | Validation |
+| Modernization Scenario | Status | Rulesets Available | Repository |
 |-------------------|--------|-------------------|------------|
-| **Java EE → Quarkus** | ✅ Production-ready | 50+ patterns | Validated on enterprise apps |
-| **Spring Boot 2 → 3** | ✅ Production-ready | 40+ patterns | Community-tested |
-| **PatternFly 5 → 6** | ✅ Production-ready | 15+ patterns | Tested on 66K+ LOC |
-| **Java 8 → 11 → 17** | ✅ Available | 25+ patterns | Language version upgrades |
-| **Angular upgrades** | ✅ Available | 30+ patterns | Community-contributed |
-| **React Router migrations** | ✅ Available | 20+ patterns | Open source validated |
+| **Java EE → Quarkus** | ✅ Production-ready | 36+ rule files | [konveyor/rulesets](https://github.com/konveyor/rulesets/tree/main/default/generated/quarkus) |
+| **Spring Boot 2 → 3** | ✅ Production-ready | 9+ rule files | [konveyor/rulesets](https://github.com/konveyor/rulesets/tree/main/default/generated/spring-boot) |
+| **Java 8/11/17/21** | ✅ Production-ready | Multiple rulesets | [konveyor/rulesets](https://github.com/konveyor/rulesets/tree/main/default/generated) |
+| **EAP 6/7/8** | ✅ Production-ready | Multiple rulesets | [konveyor/rulesets](https://github.com/konveyor/rulesets/tree/main/default/generated) |
+| **Camel 3/4, Hibernate** | ✅ Production-ready | Multiple rulesets | [konveyor/rulesets](https://github.com/konveyor/rulesets/tree/main/default/generated) |
+| **Custom migrations** | ✅ AI-generated | Generate from any guide (2 min) | [Rule generator](https://github.com/tsanders-rh/analyzer-rule-generator) |
 
 **What "hardened" means:**
 - ✅ Tested on real production codebases
@@ -436,13 +436,13 @@ open ./analysis-results/output.html
 - Effort estimates and prioritization
 - Links to migration guides
 
-**Community rulesets available for:**
-- Java EE → Quarkus
-- Spring Boot 2 → 3
-- PatternFly 5 → 6
-- Angular upgrades
-- React Router migrations
-- [Browse all rulesets →](https://github.com/konveyor/rulesets)
+**Production rulesets available for:**
+- Java EE → Quarkus (36+ rules)
+- Spring Boot 2 → 3 (9+ rules)
+- Java 8/11/17/21 upgrades
+- EAP 6/7/8, Camel 3/4, Hibernate
+- Jakarta EE, OpenLiberty, Cloud readiness
+- [Browse all 29+ rulesets →](https://github.com/konveyor/rulesets/tree/main/default/generated)
 
 ### Path 2: Generate Rules for Your Framework (Most Flexible)
 
