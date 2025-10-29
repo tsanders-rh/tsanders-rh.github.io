@@ -13,9 +13,9 @@ classes: wide
 ---
 
 **Series: Automating UI Migrations with Konveyor**
-- Part 1: [Generating Migration Rules with AI](/migration/ai/konveyor/patternfly/2025/10/22/automating-ui-migrations-ai-analyzer-rules.html)
+- Part 1: [Automating Large-Scale UI Migrations with AI-Generated Analyzer Rules](/migration/ai/konveyor/patternfly/2025/10/22/automating-ui-migrations-ai-analyzer-rules.html)
 - **Part 2: Improving Detection with Semantic Analysis** (this post)
-- Part 3: [Automating Fixes with Konveyor AI](/migration/ai/konveyor/patternfly/automating-patternfly-fixes-konveyor-ai.html)
+- Part 3: Automating Fixes with Konveyor AI (coming soon)
 
 ---
 
@@ -27,7 +27,7 @@ classes: wide
 2. **Find them accurately** → Semantic analysis (Part 2 - this post)
 3. **Fix them with AI assistance** → AI-guided refactoring (Part 3)
 
-In [Part 1](/migration/ai/konveyor/patternfly/2025/10/22/automating-ui-migrations-ai-analyzer-rules.html), we generated PatternFly v5→v6 migration rules from documentation using AI. It worked, but text-based pattern matching produced **15-20% false positives**.
+In Part 1, we generated PatternFly v5→v6 migration rules from documentation using AI. It worked, but text-based pattern matching produced **15-20% false positives**.
 
 **Why does accuracy matter?** Because in Part 3, we'll use Konveyor AI to assist with refactoring the violations. False positives waste AI tokens, produce incorrect suggestions, and erode trust in AI assistance.
 
@@ -276,7 +276,7 @@ kantra automatically:
 - ✅ Production-ready ruleset available
 - **✅ Violations are now AI-ready**
 
-**Part 3 - AI-Assisted Fixes** ([next post](/migration/ai/konveyor/patternfly/automating-patternfly-fixes-konveyor-ai.html)):
+**Part 3 - AI-Assisted Fixes** (coming soon):
 - 🔜 Use Konveyor AI IDE extension to assist with refactoring
 - 🔜 Leverage the 95% accuracy from semantic analysis
 - 🔜 Significantly reduce manual refactoring time
@@ -311,8 +311,6 @@ import { Content } from '@patternfly/react-core';
 
 Multiply this by 886 instances, and you see why accuracy matters.
 
-[Read Part 3 →](/migration/ai/konveyor/patternfly/automating-patternfly-fixes-konveyor-ai.html)
-
 ---
 
 ## Next Steps
@@ -338,9 +336,9 @@ Multiply this by 886 instances, and you see why accuracy matters.
 ## Resources
 
 **This Series:**
-- Part 1: [Generating Migration Rules with AI](/migration/ai/konveyor/patternfly/2025/10/22/automating-ui-migrations-ai-analyzer-rules.html)
+- Part 1: [Automating Large-Scale UI Migrations with AI-Generated Analyzer Rules](/migration/ai/konveyor/patternfly/2025/10/22/automating-ui-migrations-ai-analyzer-rules.html)
 - Part 2: Improving Detection with Semantic Analysis (this post)
-- Part 3: [Automating Fixes with Konveyor AI](/migration/ai/konveyor/patternfly/automating-patternfly-fixes-konveyor-ai.html)
+- Part 3: Automating Fixes with Konveyor AI (coming soon)
 
 **Tools:**
 - [PatternFly v5→v6 Ruleset](https://github.com/tsanders-rh/analyzer-rule-generator/tree/main/examples/rulesets/patternfly-v5-to-v6) - Production-validated
