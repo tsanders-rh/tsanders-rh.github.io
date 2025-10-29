@@ -1,7 +1,7 @@
 ---
 layout: single
 title: "Part 2: Improving PatternFly Migration Detection with Semantic Analysis"
-date: 2025-10-21
+date: 2025-10-29
 categories: [migration, ai, konveyor, typescript]
 tags: [migration, typescript, konveyor, static-analysis, semantic-analysis, patternfly, react]
 excerpt: "Why accuracy matters: How semantic analysis reduced false positives by 75%, setting the stage for AI-assisted refactoring"
@@ -125,7 +125,7 @@ I validated semantic analysis against **[tackle2-ui](https://github.com/konveyor
 | `EmptyState` refactoring | 200 | nodejs.referenced | ✅ Precise locations |
 | CSS class prefix (`pf-v5-` → `pf-v6-`) | 172 | builtin.filecontent | ✅ Pattern-based (safe) |
 | CSS variable prefix updates | 45 | builtin.filecontent | ✅ Pattern-based (safe) |
-| React token syntax changes | 21 | nodejs.referenced | ✅ Semantic matches |
+| React token syntax changes | 21 | builtin.filecontent | ✅ Pattern-based (safe) |
 
 ![Analysis Output Comparison](/assets/images/posts/typescript-provider/analysis-results.png)
 
@@ -228,9 +228,8 @@ python scripts/generate_rules.py \
   --target patternfly-6
 
 ✓ Generated 10 rules
-  - 5 using nodejs.referenced (component migrations)
-  - 3 using builtin.filecontent (CSS patterns)
-  - 2 using builtin.filecontent (token syntax)
+  - 4 using nodejs.referenced (component migrations: Chip, Tile, Text, EmptyState)
+  - 6 using builtin.filecontent (CSS patterns, import paths, props, token syntax)
 ```
 
 **nodejs provider doesn't increase the number of rules** - it improves the **quality** of results. Same rules, better accuracy.
