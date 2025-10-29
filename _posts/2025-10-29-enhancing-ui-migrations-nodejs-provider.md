@@ -13,7 +13,7 @@ classes: wide
 ---
 
 **Series: Automating UI Migrations with Konveyor**
-- Part 1: [Automating Large-Scale UI Migrations with AI-Generated Analyzer Rules](/migration/ai/konveyor/patternfly/2025/10/22/automating-ui-migrations-ai-analyzer-rules.html)
+- Part 1: [Automating Large-Scale UI Migrations with AI-Generated Analyzer Rules](https://www.migandmod.net/2025/10/22/automating-ui-migrations-ai-analyzer-rules/)
 - **Part 2: Improving Detection with Semantic Analysis** (this post)
 - Part 3: Automating Fixes with Konveyor AI (coming soon)
 
@@ -336,7 +336,7 @@ Multiply this by 886 instances, and you see why accuracy matters.
 ## Resources
 
 **This Series:**
-- Part 1: [Automating Large-Scale UI Migrations with AI-Generated Analyzer Rules](/migration/ai/konveyor/patternfly/2025/10/22/automating-ui-migrations-ai-analyzer-rules.html)
+- Part 1: [Automating Large-Scale UI Migrations with AI-Generated Analyzer Rules](https://www.migandmod.net/2025/10/22/automating-ui-migrations-ai-analyzer-rules/)
 - Part 2: Improving Detection with Semantic Analysis (this post)
 - Part 3: Automating Fixes with Konveyor AI (coming soon)
 
