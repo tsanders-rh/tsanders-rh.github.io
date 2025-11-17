@@ -385,9 +385,9 @@ konveyor-rules
 ```
 
 **Resources:**
-- [Full skill documentation](.claude/skills/konveyor-rules/README.md)
-- [2-minute demo script](.claude/skills/konveyor-rules/QUICK-DEMO.md)
-- [Example conversations](.claude/skills/konveyor-rules/examples.md)
+- [Full skill documentation](https://github.com/tsanders-rh/analyzer-rule-generator/blob/main/.claude/skills/konveyor-rules/README.md)
+- [2-minute demo script](https://github.com/tsanders-rh/analyzer-rule-generator/blob/main/.claude/skills/konveyor-rules/QUICK-DEMO.md)
+- [Example conversations](https://github.com/tsanders-rh/analyzer-rule-generator/blob/main/.claude/skills/konveyor-rules/examples.md)
 
 ## What's Next
 
