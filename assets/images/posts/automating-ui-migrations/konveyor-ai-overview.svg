@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1400" height="300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; font-size: 28px; font-weight: 700; fill: #333; }
+      .box-title { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; font-size: 18px; font-weight: 700; fill: white; }
+      .box-subtitle { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; font-size: 14px; fill: white; }
+      .metric { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; font-size: 24px; font-weight: 700; }
+      .metric-label { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; font-size: 12px; fill: #666; }
+    </style>
+
+    <!-- Arrow marker -->
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="700" y="40" text-anchor="middle" class="title">Complete Automation Pipeline</text>
+
+  <!-- Part 1 Box -->
+  <rect x="50" y="80" width="300" height="140" fill="#339af0" rx="12" stroke="#1971c2" stroke-width="2"/>
+  <text x="200" y="110" text-anchor="middle" class="box-title">Part 1: Rule Generation</text>
+  <text x="200" y="135" text-anchor="middle" class="box-subtitle">Migration Docs → AI</text>
+  <text x="200" y="180" text-anchor="middle" class="metric" fill="white">230 Rules</text>
+  <text x="200" y="200" text-anchor="middle" class="box-subtitle">50 files</text>
+
+  <!-- Arrow 1 -->
+  <path d="M 350 150 L 410 150" stroke="#666" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Part 2 Box -->
+  <rect x="410" y="80" width="300" height="140" fill="#51cf66" rx="12" stroke="#37b24d" stroke-width="2"/>
+  <text x="560" y="110" text-anchor="middle" class="box-title">Part 2: Detection</text>
+  <text x="560" y="135" text-anchor="middle" class="box-subtitle">Semantic Analysis</text>
+  <text x="560" y="180" text-anchor="middle" class="metric" fill="white">3,557 Violations</text>
+  <text x="560" y="200" text-anchor="middle" class="box-subtitle">95% precision</text>
+
+  <!-- Arrow 2 -->
+  <path d="M 710 150 L 770 150" stroke="#666" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Part 3 Box (Highlighted) -->
+  <rect x="770" y="70" width="300" height="160" fill="#9775fa" rx="12" stroke="#7950f2" stroke-width="4"/>
+  <text x="920" y="100" text-anchor="middle" class="box-title">Part 3: Automation</text>
+  <text x="920" y="125" text-anchor="middle" class="box-subtitle">Konveyor AI</text>
+  <text x="920" y="165" text-anchor="middle" class="metric" fill="white">3,085 Auto-fixes</text>
+  <text x="920" y="185" text-anchor="middle" class="box-subtitle">+ 472 reviews</text>
+  <text x="920" y="210" text-anchor="middle" class="metric" fill="#ffd43b" style="font-size: 20px;">87% time saved</text>
+
+  <!-- Arrow 3 -->
+  <path d="M 1070 150 L 1130 150" stroke="#666" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Result Box -->
+  <rect x="1130" y="95" width="210" height="110" fill="#f8f9fa" rx="12" stroke="#dee2e6" stroke-width="2"/>
+  <text x="1235" y="125" text-anchor="middle" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; font-size: 16px; font-weight: 700; fill: #333;">Migration Complete</text>
+  <text x="1235" y="155" text-anchor="middle" class="metric" fill="#37b24d">103 Hours Saved</text>
+  <text x="1235" y="180" text-anchor="middle" class="metric-label">119h manual → 16h with AI</text>
+
+  <!-- Key Metrics Box -->
+  <rect x="50" y="240" width="1290" height="50" fill="#f8f9fa" rx="8" stroke="#dee2e6" stroke-width="1"/>
+  <text x="150" y="260" text-anchor="middle" class="metric-label">KEY METRICS:</text>
+
+  <text x="350" y="265" text-anchor="middle" class="metric" fill="#9775fa" style="font-size: 18px;">87%</text>
+  <text x="350" y="280" text-anchor="middle" class="metric-label">Automation Rate</text>
+
+  <text x="550" y="265" text-anchor="middle" class="metric" fill="#37b24d" style="font-size: 18px;">99%</text>
+  <text x="550" y="280" text-anchor="middle" class="metric-label">Acceptance Rate</text>
+
+  <text x="750" y="265" text-anchor="middle" class="metric" fill="#339af0" style="font-size: 18px;">95%</text>
+  <text x="750" y="280" text-anchor="middle" class="metric-label">Detection Precision</text>
+
+  <text x="950" y="265" text-anchor="middle" class="metric" fill="#ff6b6b" style="font-size: 18px;">7.4x</text>
+  <text x="950" y="280" text-anchor="middle" class="metric-label">ROI</text>
+
+  <text x="1150" y="265" text-anchor="middle" class="metric" fill="#fd7e14" style="font-size: 18px;">103 Hours</text>
+  <text x="1150" y="280" text-anchor="middle" class="metric-label">Time Saved</text>
+</svg>

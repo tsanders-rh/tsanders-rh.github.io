@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; font-size: 24px; font-weight: 700; fill: #e0e0e0; }
+      .subtitle { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; font-size: 14px; fill: #b0b0b0; }
+      .label { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; font-size: 16px; font-weight: 600; fill: #e0e0e0; }
+      .hours { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; font-size: 20px; font-weight: 700; }
+      .breakdown { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; font-size: 12px; fill: #b0b0b0; }
+    </style>
+  </defs>
+
+  <!-- Title -->
+  <text x="400" y="40" text-anchor="middle" class="title">Time Investment Comparison</text>
+  <text x="400" y="65" text-anchor="middle" class="subtitle">PatternFly 5→6 Migration with Konveyor AI</text>
+
+  <!-- Manual Approach Bar -->
+  <text x="20" y="130" class="label">Manual Approach</text>
+  <rect x="20" y="140" width="660" height="60" fill="#ff6b6b" rx="8"/>
+  <text x="690" y="175" class="hours" fill="#ff6b6b">119 hours</text>
+  <text x="350" y="175" text-anchor="middle" class="hours" fill="white">Manual coding, testing, debugging</text>
+
+  <!-- With Konveyor AI Bar -->
+  <text x="20" y="250" class="label">With Konveyor AI</text>
+  <rect x="20" y="260" width="89" height="60" fill="#51cf66" rx="8"/>
+  <text x="120" y="295" class="hours" fill="#51cf66">16 hours</text>
+
+  <!-- Breakdown bars -->
+  <rect x="20" y="260" width="6" height="60" fill="#38b000" rx="4"/>
+  <rect x="26" y="260" width="72" height="60" fill="#51cf66" rx="4"/>
+  <rect x="98" y="260" width="11" height="60" fill="#69db7c" rx="4"/>
+
+  <!-- Breakdown labels -->
+  <text x="23" y="340" class="breakdown" text-anchor="middle">AI</text>
+  <text x="23" y="355" class="breakdown" text-anchor="middle">&lt;1h</text>
+
+  <text x="62" y="340" class="breakdown" text-anchor="middle">Review</text>
+  <text x="62" y="355" class="breakdown" text-anchor="middle">~13h</text>
+
+  <text x="103" y="340" class="breakdown" text-anchor="middle">Edge</text>
+  <text x="103" y="355" class="breakdown" text-anchor="middle">~2h</text>
+
+  <!-- Savings Arrow and Label -->
+  <path d="M 130 290 L 620 150" stroke="#9775fa" stroke-width="3" fill="none" marker-end="url(#arrowhead)" stroke-dasharray="5,5"/>
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#9775fa" />
+    </marker>
+  </defs>
+
+  <rect x="290" y="195" width="220" height="50" fill="#f3f0ff" stroke="#9775fa" stroke-width="2" rx="8"/>
+  <text x="400" y="217" text-anchor="middle" class="label" fill="#9775fa">103 Hours Saved</text>
+  <text x="400" y="235" text-anchor="middle" class="subtitle" fill="#9775fa">87% Time Reduction</text>
+</svg>
