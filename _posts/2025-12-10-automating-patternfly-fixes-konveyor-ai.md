@@ -1,7 +1,7 @@
 ---
 layout: single
 title: "Part 3: Automating PatternFly Migration Fixes with Konveyor AI"
-date: 2025-11-05
+date: 2025-12-10
 categories: [migration, ai, konveyor, patternfly]
 tags: [migration, ai, konveyor, automation, refactoring, patternfly, react]
 excerpt: "The payoff: How Konveyor AI achieves 87% automation and 87% time savings on PatternFly migrations using high-precision violations from semantic analysis"
